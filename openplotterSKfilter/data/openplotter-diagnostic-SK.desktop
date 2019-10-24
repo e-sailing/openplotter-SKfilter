@@ -1,7 +1,7 @@
 [Desktop Entry]
 Name=OpenPlotter Signal K Diagnostic
-Exec=diagnostic-SK-input
-Icon=openplotter-24
+Exec=diagnostic-SKinput
+Icon=diagnosticSKinput
 StartupNotify=true
 Terminal=false
 Type=Application

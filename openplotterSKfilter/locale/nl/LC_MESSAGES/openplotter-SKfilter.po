@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-24 17:11+0200\n"
-"PO-Revision-Date: 2019-10-24 17:23+0200\n"
+"PO-Revision-Date: 2019-10-24 17:35+0200\n"
 "Last-Translator: e-sailing <e.minus.sailing@gmail.com>\n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: nl_NL\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,140 +20,140 @@ msgstr ""
 
 #: diagnosticSKinput.py:73
 msgid "SRC"
-msgstr ""
+msgstr "SRC"
 
 #: diagnosticSKinput.py:74
 msgid "Signal K"
-msgstr ""
+msgstr "Signal K"
 
 #: diagnosticSKinput.py:75 nodes_SK_filter.py:405 nodes_SK_filter.py:413
 #: openplotterSKfilter.py:145
 msgid "Value"
-msgstr ""
+msgstr "Waarde"
 
 #: diagnosticSKinput.py:76 unit-private.py:59
 msgid "Unit"
-msgstr ""
+msgstr "Eenheid"
 
 #: diagnosticSKinput.py:77
 msgid "Interval"
-msgstr ""
+msgstr "Interval"
 
 #: diagnosticSKinput.py:78
 msgid "Status"
-msgstr ""
+msgstr "Staat"
 
 #: diagnosticSKinput.py:79 unit-private.py:60
 msgid "Description"
-msgstr ""
+msgstr "Omschrijving"
 
 #: diagnosticSKinput.py:80 openplotterSKfilter.py:130
 msgid "label"
-msgstr ""
+msgstr "label"
 
 #: diagnosticSKinput.py:81 openplotterSKfilter.py:130
 msgid "type"
-msgstr ""
+msgstr "type"
 
 #: diagnosticSKinput.py:82 openplotterSKfilter.py:130
 msgid "pgn"
-msgstr ""
+msgstr "pgn"
 
 #: diagnosticSKinput.py:83 openplotterSKfilter.py:130
 msgid "src"
-msgstr ""
+msgstr "src"
 
 #: diagnosticSKinput.py:84 openplotterSKfilter.py:130
 msgid "sentence"
-msgstr ""
+msgstr "zin"
 
 #: diagnosticSKinput.py:85 openplotterSKfilter.py:130
 msgid "talker"
-msgstr ""
+msgstr "prater"
 
 #: diagnosticSKinput.py:87
 msgid "Sort SRC"
-msgstr ""
+msgstr "Sorteer SRC"
 
 #: diagnosticSKinput.py:90 unit-private.py:68
 msgid "Sort SK"
-msgstr ""
+msgstr "Sorteer SK"
 
 #: diagnosticSKinput.py:93
 msgid "Show All SK keys"
-msgstr ""
+msgstr "Toon alle SK-toetsen"
 
 #: diagnosticSKinput.py:96
 msgid "private Unit"
-msgstr ""
+msgstr "privé-eenheid"
 
 #: diagnosticSKinput.py:100
 msgid "Unit Setting"
-msgstr ""
+msgstr "Eenheid instellen"
 
 #: getkeys.py:31
 msgid "File not found: "
-msgstr ""
+msgstr "Bestand niet gevonden: "
 
 #: getkeys.py:54 show_keys.py:26 show_keys.py:57
 msgid "ungrouped"
-msgstr ""
+msgstr "ongegroepeerde"
 
 #: nodes_SK_filter.py:299
 msgid "Add Signal K trigger"
-msgstr ""
+msgstr "Signal K-trigger toevoegen"
 
 #: nodes_SK_filter.py:300
 msgid "Edit Signal K trigger"
-msgstr ""
+msgstr "Bewerk Signal K trigger"
 
 #: nodes_SK_filter.py:312
 msgid "Add Signal K filter"
-msgstr ""
+msgstr "Voeg Signal K-filter toe"
 
 #: nodes_SK_filter.py:313
 msgid "Edit Signal K filter"
-msgstr ""
+msgstr "Bewerk Signal K-filter"
 
 #: nodes_SK_filter.py:363 select_key.py:41
 msgid "Vessel"
-msgstr ""
+msgstr "Scheep"
 
 #: nodes_SK_filter.py:370 openplotterSKfilter.py:142
 msgid "Signal K key"
-msgstr ""
+msgstr "Signal K-toets"
 
 #: nodes_SK_filter.py:372
 msgid "Add"
-msgstr ""
+msgstr "Toevoegen"
 
 #: nodes_SK_filter.py:373
 msgid "Edit"
-msgstr ""
+msgstr "Bewerk"
 
 #: nodes_SK_filter.py:374
 msgid "list SK with multiple source"
-msgstr ""
+msgstr "lijst SK met meerdere bronnen"
 
 #: nodes_SK_filter.py:387
 msgid "filter on Source"
-msgstr ""
+msgstr "filter op Bron"
 
 #: nodes_SK_filter.py:394
 msgid "Operator"
-msgstr ""
+msgstr "Operator"
 
 #: nodes_SK_filter.py:402
 msgid "String"
-msgstr ""
+msgstr "Draad"
 
 #: nodes_SK_filter.py:402
 msgid "Number"
-msgstr ""
+msgstr "Nummer"
 
 #: nodes_SK_filter.py:424 select_key.py:70
 msgid "Cancel"
-msgstr ""
+msgstr "Annuleren"
 
 #: nodes_SK_filter.py:425 select_key.py:71
 msgid "OK"
@@ -161,209 +161,209 @@ msgstr ""
 
 #: nodes_SK_filter.py:502
 msgid "You have to provide a Signal K key."
-msgstr ""
+msgstr "U moet een Signal K-toets opgeven."
 
 #: nodes_SK_filter.py:505
 msgid "You have to provide a vessel ID."
-msgstr ""
+msgstr "U moet een scheeps-ID opgeven."
 
 #: nodes_SK_filter.py:508 select_key.py:309
 msgid "Failed. Characters not allowed."
-msgstr ""
+msgstr "Mislukt. Tekens niet toegestaan."
 
 #: nodes_SK_filter.py:511
 msgid "You have to provide a filter."
-msgstr ""
+msgstr "U moet een filter opgeven."
 
 #: nodes_SK_filter.py:514
 msgid "You have to provide an operator "
-msgstr ""
+msgstr "U moet een operator opgeven "
 
 #: nodes_SK_filter.py:549 nodes_SK_filter.py:606
 msgid "You have to provide 2 values."
-msgstr ""
+msgstr "U moet 2 waarden opgeven."
 
 #: nodes_SK_filter.py:556 nodes_SK_filter.py:599 nodes_SK_filter.py:613
 msgid "Use this date and time format: YYYY-MM-DD HH:MM:SS"
-msgstr ""
+msgstr "Gebruik deze datum- en tijdnotatie: JJJJ-MM-DD HH: MM: SS"
 
 #: nodes_SK_filter.py:589
 msgid "You have to select a value type."
-msgstr ""
+msgstr "U moet een waardetype selecteren."
 
 #: nodes_SK_filter.py:592
 msgid "You have to provide a value."
-msgstr ""
+msgstr "Je moet een waarde opgeven."
 
 #: nodes_SK_filter.py:640
 msgid "Set Signal K key"
-msgstr ""
+msgstr "Stel Signal K-toets in"
 
 #: nodes_SK_filter.py:641
 msgid "Edit Signal K key"
-msgstr ""
+msgstr "Signal K-toets bewerken"
 
 #: openplotterSKfilter.py:48
 msgid "OpenPlotter Signal K Filter (uses node-red)"
-msgstr ""
+msgstr "OpenPlotter Signal K-filter (gebruikt knooppuntrood)"
 
 #: openplotterSKfilter.py:58
 msgid "Help"
-msgstr ""
+msgstr "Helpen"
 
 #: openplotterSKfilter.py:61
 msgid "Settings"
-msgstr ""
+msgstr "Instellingen"
 
 #: openplotterSKfilter.py:70
 msgid "Filter"
-msgstr ""
+msgstr "Filter"
 
 #: openplotterSKfilter.py:128
 msgid "is between"
-msgstr ""
+msgstr "is tussen"
 
 #: openplotterSKfilter.py:128
 msgid "contains"
-msgstr ""
+msgstr "bevat"
 
 #: openplotterSKfilter.py:128
 msgid "is true"
-msgstr ""
+msgstr "is waar"
 
 #: openplotterSKfilter.py:128
 msgid "is null"
-msgstr ""
+msgstr "is niets"
 
 #: openplotterSKfilter.py:128
 msgid "is not null"
-msgstr ""
+msgstr "is niet nul"
 
 #: openplotterSKfilter.py:128
 msgid "is empty"
-msgstr ""
+msgstr "is leeg"
 
 #: openplotterSKfilter.py:128
 msgid "is not empty"
-msgstr ""
+msgstr "is niet leeg"
 
 #: openplotterSKfilter.py:143
 msgid "Source Type"
-msgstr ""
+msgstr "Bron Type"
 
 #: openplotterSKfilter.py:144
 msgid "Condition"
-msgstr ""
+msgstr "Staat"
 
 #: openplotterSKfilter.py:146
 msgid "Value2"
-msgstr ""
+msgstr "Waarde2"
 
 #: openplotterSKfilter.py:152
 msgid "add"
-msgstr ""
+msgstr "toevoegen"
 
 #: openplotterSKfilter.py:155
 msgid "delete"
-msgstr ""
+msgstr "verwijderen"
 
 #: openplotterSKfilter.py:158
 msgid "SK Diagnostic"
-msgstr ""
+msgstr "SK Diagnostiek"
 
 #: openplotterSKfilter.py:167
 msgid "Apply changes"
-msgstr ""
+msgstr "Pas wijzigingen toe"
 
 #: openplotterSKfilter.py:169
 msgid "Cancel changes"
-msgstr ""
+msgstr "Annuleren veranderingen"
 
 #: openplotterSKfilter.py:412
 msgid "Select an item to delete"
-msgstr ""
+msgstr "Selecteer een item om te verwijderen"
 
 #: openplotterSKfilter.py:697 openplotterSKfilter.py:699
 #: openplotterSKfilter.py:736
 msgid "Signal K server restarted"
-msgstr ""
+msgstr "Signal K-server opnieuw gestart"
 
 #: openplotterSKfilter.py:697
 msgid "Starting Node-Red... "
-msgstr ""
+msgstr "Node-Red starten ... "
 
 #: openplotterSKfilter.py:699
 msgid "Node-Red restarted"
-msgstr ""
+msgstr "Node-Red opnieuw gestart"
 
 #: openplotterSKfilter.py:734
 msgid "Restarting Signal K server... "
-msgstr ""
+msgstr "Signal K-server opnieuw opstarten ... "
 
 #: select_key.py:23
 msgid "Select Signal K key"
-msgstr ""
+msgstr "Selecteer de toets Signal K"
 
 #: select_key.py:34
 msgid "Error. File not found: "
-msgstr ""
+msgstr "Fout. Bestand niet gevonden: "
 
 #: select_key.py:43
 msgid "Refresh"
-msgstr ""
+msgstr "Verversen"
 
 #: select_key.py:48 show_keys.py:36
 msgid "Groups"
-msgstr ""
+msgstr "Groepen"
 
 #: select_key.py:52 show_keys.py:44
 msgid "Keys"
-msgstr ""
+msgstr "Keys"
 
 #: select_key.py:56
 msgid "Properties"
-msgstr ""
+msgstr "Eigendommen"
 
 #: select_key.py:62
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
-msgstr ""
+msgstr "Vervangen * (toegestane tekens: 0-9, az, AZ)"
 
 #: select_key.py:64
 msgid "Replace"
-msgstr ""
+msgstr "Vervangen"
 
 #: select_key.py:67
 msgid "Selected key"
-msgstr ""
+msgstr "Geselecteerde sleutel"
 
 #: select_key.py:319
 msgid "Failed. Replace * by some text."
-msgstr ""
+msgstr "Mislukt. Vervang * door wat tekst."
 
 #: show_keys.py:24
 msgid "Show Signal K keys"
-msgstr ""
+msgstr "Signal K-toetsen weergeven"
 
 #: show_keys.py:59
 msgid "Ungrouped Signal K keys."
-msgstr ""
+msgstr "Niet-gegroepeerde Signal K-toetsen."
 
 #: unit-private.py:58
 msgid "SK Unit"
-msgstr ""
+msgstr "SK-eenheid"
 
 #: unit-private.py:62
 msgid "Sort SK Unit"
-msgstr ""
+msgstr "Sorteer SK-eenheid"
 
 #: unit-private.py:65
 msgid "Sort Unit"
-msgstr ""
+msgstr "Sorteer eenheid"
 
 #: unit-private.py:71
 msgid "change selected"
-msgstr ""
+msgstr "verandering geselecteerd"
 
 #: unit-private.py:87
 msgid "convert"
-msgstr ""
+msgstr "converteren"

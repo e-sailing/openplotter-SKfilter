@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-24 17:11+0200\n"
-"PO-Revision-Date: 2019-10-24 17:23+0200\n"
+"PO-Revision-Date: 2019-10-24 17:33+0200\n"
 "Last-Translator: e-sailing <e.minus.sailing@gmail.com>\n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: it\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,140 +20,140 @@ msgstr ""
 
 #: diagnosticSKinput.py:73
 msgid "SRC"
-msgstr ""
+msgstr "SRC"
 
 #: diagnosticSKinput.py:74
 msgid "Signal K"
-msgstr ""
+msgstr "Signal K"
 
 #: diagnosticSKinput.py:75 nodes_SK_filter.py:405 nodes_SK_filter.py:413
 #: openplotterSKfilter.py:145
 msgid "Value"
-msgstr ""
+msgstr "Valore"
 
 #: diagnosticSKinput.py:76 unit-private.py:59
 msgid "Unit"
-msgstr ""
+msgstr "Unità"
 
 #: diagnosticSKinput.py:77
 msgid "Interval"
-msgstr ""
+msgstr "Intervallo"
 
 #: diagnosticSKinput.py:78
 msgid "Status"
-msgstr ""
+msgstr "Stato"
 
 #: diagnosticSKinput.py:79 unit-private.py:60
 msgid "Description"
-msgstr ""
+msgstr "Descrizione"
 
 #: diagnosticSKinput.py:80 openplotterSKfilter.py:130
 msgid "label"
-msgstr ""
+msgstr "etichetta"
 
 #: diagnosticSKinput.py:81 openplotterSKfilter.py:130
 msgid "type"
-msgstr ""
+msgstr "genere"
 
 #: diagnosticSKinput.py:82 openplotterSKfilter.py:130
 msgid "pgn"
-msgstr ""
+msgstr "PGN"
 
 #: diagnosticSKinput.py:83 openplotterSKfilter.py:130
 msgid "src"
-msgstr ""
+msgstr "src"
 
 #: diagnosticSKinput.py:84 openplotterSKfilter.py:130
 msgid "sentence"
-msgstr ""
+msgstr "frase"
 
 #: diagnosticSKinput.py:85 openplotterSKfilter.py:130
 msgid "talker"
-msgstr ""
+msgstr "parlatore"
 
 #: diagnosticSKinput.py:87
 msgid "Sort SRC"
-msgstr ""
+msgstr "Ordina SRC"
 
 #: diagnosticSKinput.py:90 unit-private.py:68
 msgid "Sort SK"
-msgstr ""
+msgstr "Ordina SK"
 
 #: diagnosticSKinput.py:93
 msgid "Show All SK keys"
-msgstr ""
+msgstr "Mostra tutte le chiavi SK"
 
 #: diagnosticSKinput.py:96
 msgid "private Unit"
-msgstr ""
+msgstr "unità privata"
 
 #: diagnosticSKinput.py:100
 msgid "Unit Setting"
-msgstr ""
+msgstr "Impostazione unità"
 
 #: getkeys.py:31
 msgid "File not found: "
-msgstr ""
+msgstr "File non trovato: "
 
 #: getkeys.py:54 show_keys.py:26 show_keys.py:57
 msgid "ungrouped"
-msgstr ""
+msgstr "non raggruppati"
 
 #: nodes_SK_filter.py:299
 msgid "Add Signal K trigger"
-msgstr ""
+msgstr "Aggiungi trigger di Signal K."
 
 #: nodes_SK_filter.py:300
 msgid "Edit Signal K trigger"
-msgstr ""
+msgstr "Modifica trigger di Signal K."
 
 #: nodes_SK_filter.py:312
 msgid "Add Signal K filter"
-msgstr ""
+msgstr "Aggiungi filtro Signal K."
 
 #: nodes_SK_filter.py:313
 msgid "Edit Signal K filter"
-msgstr ""
+msgstr "Modifica filtro Signal K."
 
 #: nodes_SK_filter.py:363 select_key.py:41
 msgid "Vessel"
-msgstr ""
+msgstr "Nave"
 
 #: nodes_SK_filter.py:370 openplotterSKfilter.py:142
 msgid "Signal K key"
-msgstr ""
+msgstr "Tasto Signal K."
 
 #: nodes_SK_filter.py:372
 msgid "Add"
-msgstr ""
+msgstr "Inserisci"
 
 #: nodes_SK_filter.py:373
 msgid "Edit"
-msgstr ""
+msgstr "modificare"
 
 #: nodes_SK_filter.py:374
 msgid "list SK with multiple source"
-msgstr ""
+msgstr "lista SK con più fonti"
 
 #: nodes_SK_filter.py:387
 msgid "filter on Source"
-msgstr ""
+msgstr "filtra su Sorgente"
 
 #: nodes_SK_filter.py:394
 msgid "Operator"
-msgstr ""
+msgstr "Operatore"
 
 #: nodes_SK_filter.py:402
 msgid "String"
-msgstr ""
+msgstr "Corda"
 
 #: nodes_SK_filter.py:402
 msgid "Number"
-msgstr ""
+msgstr "Numero"
 
 #: nodes_SK_filter.py:424 select_key.py:70
 msgid "Cancel"
-msgstr ""
+msgstr "Annulla"
 
 #: nodes_SK_filter.py:425 select_key.py:71
 msgid "OK"
@@ -161,209 +161,209 @@ msgstr ""
 
 #: nodes_SK_filter.py:502
 msgid "You have to provide a Signal K key."
-msgstr ""
+msgstr "Devi fornire un tasto Signal K."
 
 #: nodes_SK_filter.py:505
 msgid "You have to provide a vessel ID."
-msgstr ""
+msgstr "Devi fornire un ID nave."
 
 #: nodes_SK_filter.py:508 select_key.py:309
 msgid "Failed. Characters not allowed."
-msgstr ""
+msgstr "Impossibile. Personaggi non ammessi."
 
 #: nodes_SK_filter.py:511
 msgid "You have to provide a filter."
-msgstr ""
+msgstr "Devi fornire un filtro."
 
 #: nodes_SK_filter.py:514
 msgid "You have to provide an operator "
-msgstr ""
+msgstr "Devi fornire un operatore "
 
 #: nodes_SK_filter.py:549 nodes_SK_filter.py:606
 msgid "You have to provide 2 values."
-msgstr ""
+msgstr "Devi fornire 2 valori."
 
 #: nodes_SK_filter.py:556 nodes_SK_filter.py:599 nodes_SK_filter.py:613
 msgid "Use this date and time format: YYYY-MM-DD HH:MM:SS"
-msgstr ""
+msgstr "Utilizzare questo formato di data e ora: AAAA-MM-GG HH: MM: SS"
 
 #: nodes_SK_filter.py:589
 msgid "You have to select a value type."
-msgstr ""
+msgstr "Devi selezionare un tipo di valore."
 
 #: nodes_SK_filter.py:592
 msgid "You have to provide a value."
-msgstr ""
+msgstr "Devi fornire un valore."
 
 #: nodes_SK_filter.py:640
 msgid "Set Signal K key"
-msgstr ""
+msgstr "Impostare il tasto Signal K."
 
 #: nodes_SK_filter.py:641
 msgid "Edit Signal K key"
-msgstr ""
+msgstr "Tasto Modifica Signal K."
 
 #: openplotterSKfilter.py:48
 msgid "OpenPlotter Signal K Filter (uses node-red)"
-msgstr ""
+msgstr "Filtro Signal K OpenPlotter (usi Node-Red)"
 
 #: openplotterSKfilter.py:58
 msgid "Help"
-msgstr ""
+msgstr "Aiuto"
 
 #: openplotterSKfilter.py:61
 msgid "Settings"
-msgstr ""
+msgstr "impostazioni"
 
 #: openplotterSKfilter.py:70
 msgid "Filter"
-msgstr ""
+msgstr "Filtro"
 
 #: openplotterSKfilter.py:128
 msgid "is between"
-msgstr ""
+msgstr "è tra"
 
 #: openplotterSKfilter.py:128
 msgid "contains"
-msgstr ""
+msgstr "contiene"
 
 #: openplotterSKfilter.py:128
 msgid "is true"
-msgstr ""
+msgstr "è vero"
 
 #: openplotterSKfilter.py:128
 msgid "is null"
-msgstr ""
+msgstr "è zero"
 
 #: openplotterSKfilter.py:128
 msgid "is not null"
-msgstr ""
+msgstr "non è nullo"
 
 #: openplotterSKfilter.py:128
 msgid "is empty"
-msgstr ""
+msgstr "è vuoto"
 
 #: openplotterSKfilter.py:128
 msgid "is not empty"
-msgstr ""
+msgstr "non è vuoto"
 
 #: openplotterSKfilter.py:143
 msgid "Source Type"
-msgstr ""
+msgstr "Tipo di fonte"
 
 #: openplotterSKfilter.py:144
 msgid "Condition"
-msgstr ""
+msgstr "Condizione"
 
 #: openplotterSKfilter.py:146
 msgid "Value2"
-msgstr ""
+msgstr "value2"
 
 #: openplotterSKfilter.py:152
 msgid "add"
-msgstr ""
+msgstr "Inserisci"
 
 #: openplotterSKfilter.py:155
 msgid "delete"
-msgstr ""
+msgstr "Elimina"
 
 #: openplotterSKfilter.py:158
 msgid "SK Diagnostic"
-msgstr ""
+msgstr "Diagnostica SK"
 
 #: openplotterSKfilter.py:167
 msgid "Apply changes"
-msgstr ""
+msgstr "Applica i cambiamenti"
 
 #: openplotterSKfilter.py:169
 msgid "Cancel changes"
-msgstr ""
+msgstr "Annulla modifiche"
 
 #: openplotterSKfilter.py:412
 msgid "Select an item to delete"
-msgstr ""
+msgstr "Seleziona un elemento da eliminare"
 
 #: openplotterSKfilter.py:697 openplotterSKfilter.py:699
 #: openplotterSKfilter.py:736
 msgid "Signal K server restarted"
-msgstr ""
+msgstr "Server Signal K riavviato"
 
 #: openplotterSKfilter.py:697
 msgid "Starting Node-Red... "
-msgstr ""
+msgstr "Di partenza Node-Red... "
 
 #: openplotterSKfilter.py:699
 msgid "Node-Red restarted"
-msgstr ""
+msgstr "Node-Red riavviato"
 
 #: openplotterSKfilter.py:734
 msgid "Restarting Signal K server... "
-msgstr ""
+msgstr "Riavvio del server Signal K ... "
 
 #: select_key.py:23
 msgid "Select Signal K key"
-msgstr ""
+msgstr "Selezionare il tasto Signal K."
 
 #: select_key.py:34
 msgid "Error. File not found: "
-msgstr ""
+msgstr "Errore. File non trovato: "
 
 #: select_key.py:43
 msgid "Refresh"
-msgstr ""
+msgstr "ricaricare"
 
 #: select_key.py:48 show_keys.py:36
 msgid "Groups"
-msgstr ""
+msgstr "gruppi"
 
 #: select_key.py:52 show_keys.py:44
 msgid "Keys"
-msgstr ""
+msgstr "chiavi"
 
 #: select_key.py:56
 msgid "Properties"
-msgstr ""
+msgstr "Proprietà"
 
 #: select_key.py:62
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
-msgstr ""
+msgstr "Sostituisci * (caratteri consentiti: 0-9, az, AZ)"
 
 #: select_key.py:64
 msgid "Replace"
-msgstr ""
+msgstr "Sostituire"
 
 #: select_key.py:67
 msgid "Selected key"
-msgstr ""
+msgstr "Chiave selezionata"
 
 #: select_key.py:319
 msgid "Failed. Replace * by some text."
-msgstr ""
+msgstr "Impossibile. Sostituisci * con del testo."
 
 #: show_keys.py:24
 msgid "Show Signal K keys"
-msgstr ""
+msgstr "Mostra i tasti Signal K."
 
 #: show_keys.py:59
 msgid "Ungrouped Signal K keys."
-msgstr ""
+msgstr "Tasti Signal K. non raggruppati."
 
 #: unit-private.py:58
 msgid "SK Unit"
-msgstr ""
+msgstr "Unità SK"
 
 #: unit-private.py:62
 msgid "Sort SK Unit"
-msgstr ""
+msgstr "Ordina unità SK"
 
 #: unit-private.py:65
 msgid "Sort Unit"
-msgstr ""
+msgstr "Ordina unità"
 
 #: unit-private.py:71
 msgid "change selected"
-msgstr ""
+msgstr "cambia selezionato"
 
 #: unit-private.py:87
 msgid "convert"
-msgstr ""
+msgstr "convertire"

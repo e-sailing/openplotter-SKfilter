@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
 
 # This file is part of Openplotter.
-# Copyright (C) 2019 by e-sailing <https://github.com/e-sailing/openplotter-SKfilter>
-#
+# Copyright (C) 2019 by sailoog <https://github.com/sailoog/openplotter>
+#                     e-sailing <https://github.com/e-sailing/openplotter>
 # Openplotter is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
 # the Free Software Foundation, either version 2 of the License, or
@@ -61,9 +61,6 @@ class SKfilterFrame(wx.Frame):
 		toolSettings = self.toolbar1.AddTool(102, _('Settings'), wx.Bitmap(self.currentdir+"/data/settings.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSettings, toolSettings)
 		self.toolbar1.AddStretchableSpace()
-		self.emptyimage = wx.Bitmap(self.currentdir+"/data/empty.png")
-		self.toolbar1.AddTool(105, '', self.emptyimage)
-		self.toolbar1.AddTool(106, '', self.emptyimage)
 
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
@@ -739,8 +736,8 @@ class SKfilterFrame(wx.Frame):
 		self.ShowStatusBarGREEN(_('Signal K server restarted'))
 		
 	def on_diagnostic_SK(self, e):
-		subprocess.call(['pkill', '-f', 'diagnostic-SK-input.py'])
-		subprocess.Popen(['python3',self.currentdir + '/diagnostic-SK-input.py'])
+		subprocess.call(['pkill', '-f', 'diagnostic-SKinput'])
+		subprocess.Popen(['diagnostic-SKinput'])
 
 def main():
 	app = wx.App()

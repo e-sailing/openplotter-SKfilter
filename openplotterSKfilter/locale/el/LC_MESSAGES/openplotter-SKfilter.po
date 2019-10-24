@@ -8,10 +8,10 @@ msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2019-10-24 17:11+0200\n"
-"PO-Revision-Date: 2019-10-24 17:23+0200\n"
+"PO-Revision-Date: 2019-10-24 17:22+0200\n"
 "Last-Translator: e-sailing <e.minus.sailing@gmail.com>\n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: el\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -20,350 +20,352 @@ msgstr ""
 
 #: diagnosticSKinput.py:73
 msgid "SRC"
-msgstr ""
+msgstr "SRC"
 
 #: diagnosticSKinput.py:74
 msgid "Signal K"
-msgstr ""
+msgstr "Σήμα K"
 
 #: diagnosticSKinput.py:75 nodes_SK_filter.py:405 nodes_SK_filter.py:413
 #: openplotterSKfilter.py:145
 msgid "Value"
-msgstr ""
+msgstr "αξία"
 
 #: diagnosticSKinput.py:76 unit-private.py:59
 msgid "Unit"
-msgstr ""
+msgstr "Μονάδα"
 
 #: diagnosticSKinput.py:77
 msgid "Interval"
-msgstr ""
+msgstr "Διάστημα"
 
 #: diagnosticSKinput.py:78
 msgid "Status"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: diagnosticSKinput.py:79 unit-private.py:60
 msgid "Description"
-msgstr ""
+msgstr "Περιγραφή"
 
 #: diagnosticSKinput.py:80 openplotterSKfilter.py:130
 msgid "label"
-msgstr ""
+msgstr "επιγραφή"
 
 #: diagnosticSKinput.py:81 openplotterSKfilter.py:130
 msgid "type"
-msgstr ""
+msgstr "τύπος"
 
 #: diagnosticSKinput.py:82 openplotterSKfilter.py:130
 msgid "pgn"
-msgstr ""
+msgstr "pgn"
 
 #: diagnosticSKinput.py:83 openplotterSKfilter.py:130
 msgid "src"
-msgstr ""
+msgstr "src"
 
 #: diagnosticSKinput.py:84 openplotterSKfilter.py:130
 msgid "sentence"
-msgstr ""
+msgstr "πρόταση"
 
 #: diagnosticSKinput.py:85 openplotterSKfilter.py:130
 msgid "talker"
-msgstr ""
+msgstr "ομιλητής"
 
 #: diagnosticSKinput.py:87
 msgid "Sort SRC"
-msgstr ""
+msgstr "Ταξινόμηση SRC"
 
 #: diagnosticSKinput.py:90 unit-private.py:68
 msgid "Sort SK"
-msgstr ""
+msgstr "Ταξινόμηση SK"
 
 #: diagnosticSKinput.py:93
 msgid "Show All SK keys"
-msgstr ""
+msgstr "Εμφάνιση όλων των πλήκτρων SK"
 
 #: diagnosticSKinput.py:96
 msgid "private Unit"
-msgstr ""
+msgstr "ιδιωτική μονάδα"
 
 #: diagnosticSKinput.py:100
 msgid "Unit Setting"
-msgstr ""
+msgstr "Ρύθμιση μονάδας"
 
 #: getkeys.py:31
 msgid "File not found: "
-msgstr ""
+msgstr "Το αρχείο δε βρέθηκε: "
 
 #: getkeys.py:54 show_keys.py:26 show_keys.py:57
 msgid "ungrouped"
-msgstr ""
+msgstr "μη ομαδοποιημένη"
 
 #: nodes_SK_filter.py:299
 msgid "Add Signal K trigger"
-msgstr ""
+msgstr "Προσθέστε σκανδάλη Signal K"
 
 #: nodes_SK_filter.py:300
 msgid "Edit Signal K trigger"
-msgstr ""
+msgstr "Επεξεργασία σκανδαλισμού Signal K"
 
 #: nodes_SK_filter.py:312
 msgid "Add Signal K filter"
-msgstr ""
+msgstr "Προσθέστε το φίλτρο Signal K"
 
 #: nodes_SK_filter.py:313
 msgid "Edit Signal K filter"
-msgstr ""
+msgstr "Επεξεργασία φίλτρου Signal K"
 
 #: nodes_SK_filter.py:363 select_key.py:41
 msgid "Vessel"
-msgstr ""
+msgstr "Σκάφος"
 
 #: nodes_SK_filter.py:370 openplotterSKfilter.py:142
 msgid "Signal K key"
-msgstr ""
+msgstr "Κλειδί Signal K"
 
 #: nodes_SK_filter.py:372
 msgid "Add"
-msgstr ""
+msgstr "Προσθέτω"
 
 #: nodes_SK_filter.py:373
 msgid "Edit"
-msgstr ""
+msgstr "Επεξεργασία"
 
 #: nodes_SK_filter.py:374
 msgid "list SK with multiple source"
-msgstr ""
+msgstr "λίστα SK με πολλαπλές πηγές"
 
 #: nodes_SK_filter.py:387
 msgid "filter on Source"
-msgstr ""
+msgstr "φιλτράρετε την προέλευση"
 
 #: nodes_SK_filter.py:394
 msgid "Operator"
-msgstr ""
+msgstr "Χειριστής"
 
 #: nodes_SK_filter.py:402
 msgid "String"
-msgstr ""
+msgstr "Σειρά"
 
 #: nodes_SK_filter.py:402
 msgid "Number"
-msgstr ""
+msgstr "Αριθμός"
 
 #: nodes_SK_filter.py:424 select_key.py:70
+#, fuzzy
+#| msgid "Cancel changes"
 msgid "Cancel"
-msgstr ""
+msgstr "Ακύρωση αλλαγών"
 
 #: nodes_SK_filter.py:425 select_key.py:71
 msgid "OK"
-msgstr ""
+msgstr "Εντάξει"
 
 #: nodes_SK_filter.py:502
 msgid "You have to provide a Signal K key."
-msgstr ""
+msgstr "Πρέπει να δώσετε ένα κλειδί Signal K."
 
 #: nodes_SK_filter.py:505
 msgid "You have to provide a vessel ID."
-msgstr ""
+msgstr "Πρέπει να δώσετε αναγνωριστικό σκάφους."
 
 #: nodes_SK_filter.py:508 select_key.py:309
 msgid "Failed. Characters not allowed."
-msgstr ""
+msgstr "Απέτυχε. Οι χαρακτήρες δεν επιτρέπονται."
 
 #: nodes_SK_filter.py:511
 msgid "You have to provide a filter."
-msgstr ""
+msgstr "Πρέπει να δώσετε ένα φίλτρο."
 
 #: nodes_SK_filter.py:514
 msgid "You have to provide an operator "
-msgstr ""
+msgstr "Πρέπει να παρέχετε έναν φορέα εκμετάλλευσης "
 
 #: nodes_SK_filter.py:549 nodes_SK_filter.py:606
 msgid "You have to provide 2 values."
-msgstr ""
+msgstr "Πρέπει να δώσετε 2 τιμές."
 
 #: nodes_SK_filter.py:556 nodes_SK_filter.py:599 nodes_SK_filter.py:613
 msgid "Use this date and time format: YYYY-MM-DD HH:MM:SS"
-msgstr ""
+msgstr "Χρησιμοποιήστε αυτήν τη μορφή ημερομηνίας και ώρας: YYYY-MM-DD HH: MM: SS"
 
 #: nodes_SK_filter.py:589
 msgid "You have to select a value type."
-msgstr ""
+msgstr "Πρέπει να επιλέξετε έναν τύπο τιμής."
 
 #: nodes_SK_filter.py:592
 msgid "You have to provide a value."
-msgstr ""
+msgstr "Πρέπει να δώσετε αξία."
 
 #: nodes_SK_filter.py:640
 msgid "Set Signal K key"
-msgstr ""
+msgstr "Ορίστε το πλήκτρο Signal K"
 
 #: nodes_SK_filter.py:641
 msgid "Edit Signal K key"
-msgstr ""
+msgstr "Επεξεργασία πλήκτρου Signal K"
 
 #: openplotterSKfilter.py:48
 msgid "OpenPlotter Signal K Filter (uses node-red)"
-msgstr ""
+msgstr "Φίλτρο OpenPlotter Signal K (χρήσεις Node-Red)"
 
 #: openplotterSKfilter.py:58
 msgid "Help"
-msgstr ""
+msgstr "Βοήθεια"
 
 #: openplotterSKfilter.py:61
 msgid "Settings"
-msgstr ""
+msgstr "Ρυθμίσεις"
 
 #: openplotterSKfilter.py:70
 msgid "Filter"
-msgstr ""
+msgstr "Φίλτρο"
 
 #: openplotterSKfilter.py:128
 msgid "is between"
-msgstr ""
+msgstr "είναι μεταξύ"
 
 #: openplotterSKfilter.py:128
 msgid "contains"
-msgstr ""
+msgstr "περιέχει"
 
 #: openplotterSKfilter.py:128
 msgid "is true"
-msgstr ""
+msgstr "είναι αλήθεια"
 
 #: openplotterSKfilter.py:128
 msgid "is null"
-msgstr ""
+msgstr "είναι null"
 
 #: openplotterSKfilter.py:128
 msgid "is not null"
-msgstr ""
+msgstr "δεν είναι μηδενική"
 
 #: openplotterSKfilter.py:128
 msgid "is empty"
-msgstr ""
+msgstr "είναι άδειο"
 
 #: openplotterSKfilter.py:128
 msgid "is not empty"
-msgstr ""
+msgstr "δεν είναι άδειο"
 
 #: openplotterSKfilter.py:143
 msgid "Source Type"
-msgstr ""
+msgstr "Τυπος πηγης"
 
 #: openplotterSKfilter.py:144
 msgid "Condition"
-msgstr ""
+msgstr "Κατάσταση"
 
 #: openplotterSKfilter.py:146
 msgid "Value2"
-msgstr ""
+msgstr "Value2"
 
 #: openplotterSKfilter.py:152
 msgid "add"
-msgstr ""
+msgstr "προσθέτω"
 
 #: openplotterSKfilter.py:155
 msgid "delete"
-msgstr ""
+msgstr "διαγράφω"
 
 #: openplotterSKfilter.py:158
 msgid "SK Diagnostic"
-msgstr ""
+msgstr "SK Διάγνωση"
 
 #: openplotterSKfilter.py:167
 msgid "Apply changes"
-msgstr ""
+msgstr "Εφαρμογή αλλαγών"
 
 #: openplotterSKfilter.py:169
 msgid "Cancel changes"
-msgstr ""
+msgstr "Ακύρωση αλλαγών"
 
 #: openplotterSKfilter.py:412
 msgid "Select an item to delete"
-msgstr ""
+msgstr "Επιλέξτε ένα αντικείμενο που θέλετε να διαγράψετε"
 
 #: openplotterSKfilter.py:697 openplotterSKfilter.py:699
 #: openplotterSKfilter.py:736
 msgid "Signal K server restarted"
-msgstr ""
+msgstr "Ο διακομιστής Signal K επανεκκινήθηκε"
 
 #: openplotterSKfilter.py:697
 msgid "Starting Node-Red... "
-msgstr ""
+msgstr "Εκκίνηση Node-Red ... "
 
 #: openplotterSKfilter.py:699
 msgid "Node-Red restarted"
-msgstr ""
+msgstr "Node-Red επανεκκίνηση"
 
 #: openplotterSKfilter.py:734
 msgid "Restarting Signal K server... "
-msgstr ""
+msgstr "Επανεκκίνηση του διακομιστή Signal K ... "
 
 #: select_key.py:23
 msgid "Select Signal K key"
-msgstr ""
+msgstr "Επιλέξτε το πλήκτρο Signal K"
 
 #: select_key.py:34
 msgid "Error. File not found: "
-msgstr ""
+msgstr "Λάθος. Το αρχείο δε βρέθηκε: "
 
 #: select_key.py:43
 msgid "Refresh"
-msgstr ""
+msgstr "Φρεσκάρω"
 
 #: select_key.py:48 show_keys.py:36
 msgid "Groups"
-msgstr ""
+msgstr "Ομάδες"
 
 #: select_key.py:52 show_keys.py:44
 msgid "Keys"
-msgstr ""
+msgstr "Κλειδιά"
 
 #: select_key.py:56
 msgid "Properties"
-msgstr ""
+msgstr "Ιδιότητες"
 
 #: select_key.py:62
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
-msgstr ""
+msgstr "Αντικατάσταση * (επιτρέπονται χαρακτήρες: 0-9, az, AZ)"
 
 #: select_key.py:64
 msgid "Replace"
-msgstr ""
+msgstr "Αντικαθιστώ"
 
 #: select_key.py:67
 msgid "Selected key"
-msgstr ""
+msgstr "Επιλεγμένο πλήκτρο"
 
 #: select_key.py:319
 msgid "Failed. Replace * by some text."
-msgstr ""
+msgstr "Απέτυχε. Αντικαταστήστε * με κάποιο κείμενο."
 
 #: show_keys.py:24
 msgid "Show Signal K keys"
-msgstr ""
+msgstr "Εμφάνιση πλήκτρων Signal K"
 
 #: show_keys.py:59
 msgid "Ungrouped Signal K keys."
-msgstr ""
+msgstr "Πλήκτρα σφάλματος Signal K χωρίς διαχωρισμό."
 
 #: unit-private.py:58
 msgid "SK Unit"
-msgstr ""
+msgstr "SK Μονάδα"
 
 #: unit-private.py:62
 msgid "Sort SK Unit"
-msgstr ""
+msgstr "Ταξινόμηση μονάδας SK"
 
 #: unit-private.py:65
 msgid "Sort Unit"
-msgstr ""
+msgstr "Μονάδα ταξινόμησης"
 
 #: unit-private.py:71
 msgid "change selected"
-msgstr ""
+msgstr "η αλλαγή είναι επιλεγμένη"
 
 #: unit-private.py:87
 msgid "convert"
-msgstr ""
+msgstr "μετατρέπω"

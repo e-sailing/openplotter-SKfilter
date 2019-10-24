@@ -27,7 +27,6 @@ class selectKey(wx.Dialog):
 
 		conf_ = conf.Conf()
 		sk_folder = conf_.get('GENERAL', 'sk_folder')
-		print(sk_folder)
 		data = ""
 		try:
 			with open('/usr/lib/node_modules/signalk-server/node_modules/@signalk/signalk-schema/dist/keyswithmetadata.json') as data_file:
@@ -68,8 +67,8 @@ class selectKey(wx.Dialog):
 		selected_key_label = wx.StaticText(panel, label=_('Selected key'))
 		self.SKkey = wx.TextCtrl(panel, style=wx.CB_READONLY)
 
-		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
-		okBtn = wx.Button(panel, wx.ID_OK)
+		cancelBtn = wx.Button(panel, wx.ID_CANCEL, label=_('Cancel'))
+		okBtn = wx.Button(panel, wx.ID_OK, label=_('OK'))
 		okBtn.Bind(wx.EVT_BUTTON, self.OnOk)
 
 		vessels = wx.BoxSizer(wx.HORIZONTAL)

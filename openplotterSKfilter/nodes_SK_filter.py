@@ -421,8 +421,8 @@ class TriggerFilterSK(wx.Dialog):
 		hline1 = wx.StaticLine(panel)
 		help_button = wx.BitmapButton(panel, bitmap=help_bmp, size=(help_bmp.GetWidth()+40, help_bmp.GetHeight()+10))
 		help_button.Bind(wx.EVT_BUTTON, self.on_help)
-		cancelBtn = wx.Button(panel, wx.ID_CANCEL)
-		okBtn = wx.Button(panel, wx.ID_OK)
+		cancelBtn = wx.Button(panel, wx.ID_CANCEL, label=_('Cancel'))
+		okBtn = wx.Button(panel, wx.ID_OK, label=_('OK'))
 		okBtn.Bind(wx.EVT_BUTTON, self.OnOk)
 
 		hbox = wx.BoxSizer(wx.HORIZONTAL)

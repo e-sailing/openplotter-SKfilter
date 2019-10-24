@@ -16,7 +16,7 @@
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
 import wx
-from getkeys import GetKeys
+from .getkeys import GetKeys
 
 
 class showKeys(wx.Dialog):
