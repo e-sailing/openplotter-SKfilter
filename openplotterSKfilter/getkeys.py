@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import json, wx
+import ujson, wx, os, subprocess, sys
 from openplotterSettings import conf
 
 class GetKeys:
@@ -25,10 +25,23 @@ class GetKeys:
 		conf_ = conf.Conf()
 		sk_folder = conf_.get('GENERAL', 'sk_folder')
 		self.data = ""
+
+		node_path_all = subprocess.check_output(['npm', 'config', 'get', 'prefix']).decode(sys.stdin.encoding)
+		node_path_line = node_path_all.split('\n')
+		node_path = '/usr'
+		print(node_path_line)
+		if len(node_path_line) > 0:
+			node_path = node_path_line[len(node_path_line) - 1]
+			print(node_path_line[len(node_path_line) - 1])
+			if len(node_path_line) > 1 and node_path == '':
+				node_path = node_path_line[len(node_path_line) - 2]
+				print(node_path_line[len(node_path_line) - 2])
+		keyswithmetadata = node_path+'/lib/node_modules/signalk-server/node_modules/@signalk/signalk-schema/dist/keyswithmetadata.json'
+
 		try:
-			with open('/usr/lib/node_modules/signalk-server/node_modules/@signalk/signalk-schema/dist/keyswithmetadata.json') as data_file:
-				self.data = json.load(data_file)
-		except: self.ShowMessage(_('File not found: ')+'keyswithmetadata.json')
+			with open(keyswithmetadata) as data_file:
+				self.data = ujson.load(data_file)
+		except: self.ShowMessage(_('File not found: ')+keyswithmetadata)
 
 		for i in self.data:
 			if '/vessels/*/' in i:
