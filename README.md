@@ -13,6 +13,7 @@ Install requirements
 
     $ sudo apt-get install fakeroot python3-all
     $ sudo pip3 install stdeb3
+    $ sudo apt-get install devscripts
 
 Clone and build
     
