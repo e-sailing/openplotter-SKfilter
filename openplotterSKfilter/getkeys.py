@@ -29,13 +29,13 @@ class GetKeys:
 		node_path_all = subprocess.check_output(['npm', 'config', 'get', 'prefix']).decode(sys.stdin.encoding)
 		node_path_line = node_path_all.split('\n')
 		node_path = '/usr'
-		print(node_path_line)
+		#print(node_path_line)
 		if len(node_path_line) > 0:
 			node_path = node_path_line[len(node_path_line) - 1]
-			print(node_path_line[len(node_path_line) - 1])
+			#print(node_path_line[len(node_path_line) - 1])
 			if len(node_path_line) > 1 and node_path == '':
 				node_path = node_path_line[len(node_path_line) - 2]
-				print(node_path_line[len(node_path_line) - 2])
+				#print(node_path_line[len(node_path_line) - 2])
 		keyswithmetadata = node_path+'/lib/node_modules/signalk-server/node_modules/@signalk/signalk-schema/dist/keyswithmetadata.json'
 
 		try:

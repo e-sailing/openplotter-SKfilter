@@ -21,8 +21,8 @@ import wx.richtext as rt
 from openplotterSettings import conf
 from openplotterSettings import language
 from openplotterSettings import platform
-from openplotterSKfilter import nodes_SK_filter
-#from nodes_SK_filter import Nodes, TriggerFilterSK, ActionEndFilterSignalk
+from openplotterSKfilter import nodes_SK_subflow
+#import nodes_SK_subflow
 
 class SKfilterFrame(wx.Frame):
 	def __init__(self):
@@ -60,18 +60,23 @@ class SKfilterFrame(wx.Frame):
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		toolSettings = self.toolbar1.AddTool(102, _('Settings'), wx.Bitmap(self.currentdir+"/data/settings.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSettings, toolSettings)
+		diagnosticSK = self.toolbar1.AddTool(103, _('SK Diagnostic'), wx.Bitmap(self.currentdir+"/data/diagnosticSKinput-24.png"))
+		self.Bind(wx.EVT_TOOL, self.OnDiagnosticSK, diagnosticSK)
 		self.toolbar1.AddStretchableSpace()
 
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
 		self.p_SKfilter = wx.Panel(self.notebook)
+		self.p_SKprefer = wx.Panel(self.notebook)
 		self.connections = wx.Panel(self.notebook)
 		self.output = wx.Panel(self.notebook)
 		self.notebook.AddPage(self.p_SKfilter, _('Filter'))
+		self.notebook.AddPage(self.p_SKprefer, _('Prefer'))
 		self.il = wx.ImageList(24, 24)
 		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
+		self.notebook.SetPageImage(1, img0)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(self.toolbar1, 0, wx.EXPAND)
@@ -79,7 +84,9 @@ class SKfilterFrame(wx.Frame):
 		self.SetSizer(vbox)
 
 		self.pageSKfilter()
-		self.read_triggers()
+		self.read_filter()
+		self.pageSKprefer()
+		self.read_prefer()
 		
 		self.Centre(True) 
 
@@ -87,21 +94,22 @@ class SKfilterFrame(wx.Frame):
 		self.GetStatusBar().SetForegroundColour(colour)
 		self.SetStatusText(w_msg)
 
-	# red for error or cancellation messages
 	def ShowStatusBarRED(self, w_msg):
 		self.ShowStatusBar(w_msg, (130,0,0))
 
-	# green for succesful messages
 	def ShowStatusBarGREEN(self, w_msg):
 		self.ShowStatusBar(w_msg, (0,130,0))
 
-	# black for informative messages
 	def ShowStatusBarBLACK(self, w_msg):
 		self.ShowStatusBar(w_msg, wx.BLACK) 
 
-	# yellow for attention messages
 	def ShowStatusBarYELLOW(self, w_msg):
-		self.ShowStatusBar(w_msg,(255,140,0)) 
+		self.ShowStatusBar(w_msg,(255,140,0))
+
+	def onTabChange(self, event):
+		try:
+			self.SetStatusText('')
+		except:pass
 
 	def onTabChange(self, event):
 		try:
@@ -117,6 +125,10 @@ class SKfilterFrame(wx.Frame):
 	def OnToolSettings(self, event): 
 		subprocess.call(['pkill', '-f', 'openplotter-settings'])
 		subprocess.Popen('openplotter-settings')
+		
+	def OnDiagnosticSK(self, event): 
+		subprocess.call(['pkill', '-f', 'diagnostic-SKinput'])
+		subprocess.Popen(['diagnostic-SKinput'])
 
 	def OnToolSend(self,e):
 		self.notebook.ChangeSelection(0)
@@ -130,7 +142,6 @@ class SKfilterFrame(wx.Frame):
 		self.available_source = [_('label'),_('type'),_('pgn'),_('src'),_('sentence'),_('talker')]
 		self.available_source_nr = ['label','type','pgn','src','sentence','talker']
 
-		#wx.Frame.__init__(self.p_SKfilter, None, title=_('SignalK input filter (uses node-red)'), size=(710,460))
 		self.SetBackgroundColour(wx.Colour(230,230,230,255))
 		
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
@@ -138,52 +149,37 @@ class SKfilterFrame(wx.Frame):
 		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(self.icon)
 
-		self.list_triggers = wx.ListCtrl(self.p_SKfilter, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
-		self.list_triggers.InsertColumn(0, _('Signal K key'), width=240)
-		self.list_triggers.InsertColumn(1, _('Source Type'), width=120)
-		self.list_triggers.InsertColumn(2, _('Condition'), width=70)
-		self.list_triggers.InsertColumn(3, _('Value'), width=90)
-		self.list_triggers.InsertColumn(4, _('Value2'), width=60)
+		self.list_filter = wx.ListCtrl(self.p_SKfilter, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
+		self.list_filter.InsertColumn(0, _('Signal K key'), width=240)
+		self.list_filter.InsertColumn(1, _('Source Type'), width=120)
+		self.list_filter.InsertColumn(2, _('Condition'), width=70)
+		self.list_filter.InsertColumn(3, _('Value'), width=90)
+		self.list_filter.InsertColumn(4, _('Value2'), width=60)
 
-		self.list_triggers.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select_triggers)
-		self.list_triggers.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselected_triggers)
-		self.list_triggers.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_edit_triggers)
+		self.list_filter.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select_filter)
+		self.list_filter.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselected_filter)
+		self.list_filter.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_edit_filter)
 
-		add_trigger = wx.Button(self.p_SKfilter, label=_('add'))
-		add_trigger.Bind(wx.EVT_BUTTON, self.on_add_trigger)
+		add_filter = wx.Button(self.p_SKfilter, label=_('add'))
+		add_filter.Bind(wx.EVT_BUTTON, self.on_add_filter)
 
-		delete_trigger = wx.Button(self.p_SKfilter, label=_('delete'))
-		delete_trigger.Bind(wx.EVT_BUTTON, self.on_delete_trigger)
+		delete_filter = wx.Button(self.p_SKfilter, label=_('delete'))
+		delete_filter.Bind(wx.EVT_BUTTON, self.on_delete_filter)
 
-		diagnostic = wx.Button(self.p_SKfilter, label=_('SK Diagnostic'))
-		diagnostic.Bind(wx.EVT_BUTTON, self.on_diagnostic_SK)
-
-		#reset_skf = wx.Button(self.p_SKfilter, label=_('Restart'))
-		#reset_skf.Bind(wx.EVT_BUTTON, self.reset_sensors)
-
-		#help_button = wx.BitmapButton(self.p_SKfilter, bitmap=self.help_bmp, size=(self.help_bmp.GetWidth()+40, self.help_bmp.GetHeight()+10))
-		#help_button.Bind(wx.EVT_BUTTON, self.on_help_filter)
-
-		apply_changes = wx.Button(self.p_SKfilter, label=_('Apply changes'))
-		apply_changes.Bind(wx.EVT_BUTTON, self.on_apply_changes_triggers)
-		cancel_changes = wx.Button(self.p_SKfilter, label=_('Cancel changes'))
-		cancel_changes.Bind(wx.EVT_BUTTON, self.on_cancel_changes_triggers)
+		restart_SK = wx.Button(self.p_SKfilter, label=_('Restart Signal K'))
+		restart_SK.Bind(wx.EVT_BUTTON, self.on_restart_SK)
 
 		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
-		hlistbox_but.Add(add_trigger, 0, wx.ALL, 5)
-		hlistbox_but.Add(delete_trigger, 0, wx.ALL, 5)
+		hlistbox_but.Add(add_filter, 0, wx.ALL, 5)
+		hlistbox_but.Add(delete_filter, 0, wx.ALL, 5)
 
 		hlistbox = wx.BoxSizer(wx.HORIZONTAL)
-		hlistbox.Add(self.list_triggers, 1, wx.ALL | wx.EXPAND, 5)
+		hlistbox.Add(self.list_filter, 1, wx.ALL | wx.EXPAND, 5)
 		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
 
 		hbox = wx.BoxSizer(wx.HORIZONTAL)
-		#hbox.Add(help_button, 0, wx.ALL, 0)
-		hbox.Add(diagnostic, 0, wx.RIGHT | wx.LEFT, 5)
-		#hbox.Add(reset_skf, 0, wx.RIGHT | wx.LEFT, 5)
 		hbox.AddStretchSpacer(1)
-		hbox.Add(apply_changes, 0, wx.RIGHT | wx.LEFT, 5)
-		hbox.Add(cancel_changes, 0, wx.RIGHT | wx.LEFT, 5)
+		hbox.Add(restart_SK, 0, wx.RIGHT | wx.LEFT, 5)
 
 		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(hlistbox, 1, wx.ALL | wx.EXPAND, 0)
@@ -191,518 +187,151 @@ class SKfilterFrame(wx.Frame):
 
 		self.p_SKfilter.SetSizer(vbox)
 		
-		self.read_triggers()
+		self.read_filter()
+		
+		font_statusBar = self.GetStatusBar().GetFont()
+		font_statusBar.SetWeight(wx.BOLD)
+		self.GetStatusBar().SetFont(font_statusBar)
+		self.GetStatusBar().SetForegroundColour(wx.BLACK)
 
-	def read_triggers(self):
-		self.actions_flow_id = 'openplot.filter'
-		self.selected_trigger = -1
-		self.selected_condition = -1
-		self.selected_action = -1
-		self.nodes = nodes_SK_filter.Nodes(self,self.actions_flow_id)
-		result = self.nodes.get_flow()
-		self.actions_flow_tree = result[0]
-		self.triggers_flow_nodes = result[1]
-		self.conditions_flow_nodes = result[2]
-		self.actions_flow_nodes = result[3]
-		self.no_actions_nodes = result[4]
-		self.remove_credentials = []
-		self.on_print_triggers()
+	def read_filter(self):
+		self.nodes = nodes_SK_subflow.Nodes(self)
+		self.nodes.get_flow()
+		self.on_print_filter()
 
-	def on_print_triggers(self):
-		self.list_triggers.DeleteAllItems()
-		self.selected_trigger = -1
-		for trigger in self.actions_flow_tree:
-			enabled = False
-			name = "t|"+trigger["trigger_node_out_id"]+"|"+trigger["type"]
-			field2 = ''
-			field3 = ''
-			field4 = ''
-			path = ''
-			path_property = ''
-			for node in self.triggers_flow_nodes:
-				if 'name' in node and name == node['name']:
-					if trigger["type"] == '0':
-						if node['type'] == 'signalk-subscribe' or 'signalk-input-handler': 
-							path = node['path']
-							field2 = node['context']
-							nsrc = node['source']
-				if node['id'] == trigger["trigger_node_out_id"]:
-					if 'func' in node:
-						if 	node['func'] == 'return msg;': enabled = True
-					else:
-						enabled = True
-				self.nodeid = node['id']
-			self.list_triggers.Append([path, '', '', '', ''])
-			self.last = self.list_triggers.GetItemCount()-1
-			self.selected_trigger = self.list_triggers.GetItemCount()-1
-			self.on_print_conditions()
+	def on_print_filter(self):
+		self.list_filter.DeleteAllItems()
+		for nodesi in self.nodes.OPnodes:
+			self.list_filter.Append([nodesi[2], nodesi[3], nodesi[4], nodesi[5], nodesi[7]])
 
-	def on_print_conditions(self):
-		if self.selected_trigger == -1: return
-		conditions = self.actions_flow_tree[self.selected_trigger]["conditions"]
-		triggertype = self.actions_flow_tree[self.selected_trigger]["type"]
-		for condition in conditions:
-			name = "c|"+condition["condition_node_out_id"]+"|"+condition["operator"]
-			field2 = ''
-			field3 = ''
-			value2 = ''
-			for node in self.conditions_flow_nodes:
-				if 'name' in node and name == node['name']:
-					if node['type'] == 'switch':
-						if 'property' in node:
-							property = node['property']
-						else:
-							property =''
-						if 'v' in node['rules'][0]:
-							if triggertype == '5':
-								try:
-									seconds = float(node['rules'][0]['v'])/1000
-									local_time = datetime.fromtimestamp(seconds)
-									field2 = local_time.strftime("%Y-%m-%d %H:%M:%S")
-								except: pass
-							else: value = node['rules'][0]['v']
-						if 't' in node['rules'][0] and node['rules'][0]['t'] == 'btwn':
-							if 'v2' in node['rules'][0]:
-								if triggertype == '5':
-									try:
-										seconds = float(node['rules'][0]['v2'])/1000
-										local_time = datetime.fromtimestamp(seconds)
-										field3 = local_time.strftime("%Y-%m-%d %H:%M:%S")
-									except: pass
-								else: value2 = node['rules'][0]['v2']
-			self.list_triggers.SetItem(self.last,1,property)
-			self.list_triggers.SetItem(self.last,2,self.available_conditions[int(condition["operator"])])
-			self.list_triggers.SetItem(self.last,3,value)
-			self.list_triggers.SetItem(self.last,4,value2)
-			self.last = self.list_triggers.GetItemCount()-1
-
-	def on_select_triggers(self, e):
-		self.selected_trigger = self.list_triggers.GetFirstSelected()
+	def on_select_filter(self, e):
+		self.selected_filter = self.list_filter.GetFirstSelected()
 	
-	def on_deselected_triggers(self, e):
-		self.on_print_triggers()
+	def on_deselected_filter(self, e):
+		self.on_print_filter()
 
-	def on_edit_triggers(self, e):
-		if self.selected_trigger == -1: return
-		node = self.actions_flow_tree[self.selected_trigger]['trigger_node_out_id']
-		self.nodetrigger = node
-		triggertype = self.actions_flow_tree[self.selected_trigger]['type']
-		name = 't|'+node+'|'+triggertype
-		edit = []
-		for i in self.triggers_flow_nodes:
-			if 'name' in i:
-				if i['name'] == name: edit.append(i)
-			else:
-				subid0 = i['id'].split('.')
-				subid = subid0[0]
-				for ii in self.triggers_flow_nodes:
-					subid0 = ii['id'].split('.')
-					subid2 = subid0[0]
-					if subid2 == subid and name == ii['name']: edit.append(i)
+	def on_edit_filter(self, e):
+		if self.selected_filter == -1: return
+		self.edit_add_filter(self.selected_filter)
 
-		#find connected condition
-		nodec = self.actions_flow_tree[self.selected_trigger]['conditions'][self.selected_condition]['condition_node_out_id']
-		typec = self.actions_flow_tree[self.selected_trigger]['conditions'][self.selected_condition]['operator']
-		name = 'c|'+nodec+'|'+typec
-		edit2 = ''
-		for i in self.conditions_flow_nodes:
-			if 'name' in i:
-				if i['name'] == name: 
-					edit2 = i['rules'][0]
-					src_property = (i['property'].split('.'))[1]
-					self.edit_cond = i
+	def on_add_filter(self, e):
+		self.edit_add_filter(-1)
 
-		self.edit_add_trigger(edit,edit2,src_property)
-
-	def on_add_trigger(self, e):
-		self.edit_add_trigger(0,0,0)
-
-	def edit_add_trigger(self, edit, edit2, src_property):
-		trigger = 0
-		dlg = nodes_SK_filter.TriggerFilterSK(self,edit,edit2,trigger,src_property)
+	def edit_add_filter(self, line):
+		dlg = nodes_SK_subflow.SetupFilterSK(self,line)
 		res = dlg.ShowModal()
 		if res == wx.OK:
-			if not edit:
-				for i in dlg.TriggerNodes:
-					self.triggers_flow_nodes.append(i)
-					if 'name' in i: items = i['name'].split('|')
-					self.actions_flow_tree.append({"trigger_node_out_id": items[1],"type": items[2],"conditions": []})					
-				j=0
-				for i in self.actions_flow_tree:
-					if i["trigger_node_out_id"] == items[1]:
-						self.act_action_flow_tree = j
-					j += 1
-				trigger_id = items[1]
-				self.conditions_flow_nodes.append(dlg.ConditionNode)
-				items = dlg.ConditionNode['name'].split('|')
-				self.actions_flow_tree[self.act_action_flow_tree]['conditions'].append({"condition_node_out_id": items[1],"operator": items[2],"actions": []})
-				self.condition_id = items[1]
-				for i in self.triggers_flow_nodes:
-					if i['id'] == trigger_id: i['wires'][0].append(dlg.condition_connector_id)				
-				self.add_action()								
-			else:
-				tmplist = []
-				nodeout = self.actions_flow_tree[self.selected_trigger]['trigger_node_out_id']
-				for i in self.triggers_flow_nodes:
-					exist = False
-					for ii in edit:
-						if i['id'] == ii['id']: 
-							exist = True
-							if ii['id'] == nodeout: wires = ii['wires']
-					if not exist: tmplist.append(i)
-				self.triggers_flow_nodes = tmplist
-				for i in dlg.TriggerNodes:
-					if 'name' in i: items = i['name'].split('|')
-					self.triggers_flow_nodes.append(i)
-				for i in self.triggers_flow_nodes:
-					if i['id'] == items[1]: i['wires'] = wires
-				self.actions_flow_tree[self.selected_trigger]['trigger_node_out_id'] = items[1]
-				self.actions_flow_tree[self.selected_trigger]['type'] = items[2]
-				selected_trigger = self.selected_trigger
-				self.on_print_triggers()
-				self.selected_trigger = selected_trigger
-				self.list_triggers.Select(self.selected_trigger)
-				#condition
-				self.edit_cond['rules'] = dlg.ConditionNode['rules']
-				self.edit_cond['property'] = dlg.ConditionNode['property']
-				namesplit = self.edit_cond['name'].split('|')
-				operator = self.available_operators.index(self.edit_cond['rules'][0]['t'])
-				self.edit_cond['name'] = namesplit[0]+'|'+namesplit[1]+'|'+str(operator)
-
-				for i in self.actions_flow_tree[self.selected_trigger]['conditions']:
-					if 'condition_node_out_id' in i:
-						if i['condition_node_out_id'] == namesplit[1]:
-							i['operator'] = str(operator)
-				
-			self.on_print_triggers()
-			last = self.list_triggers.GetItemCount()-1
-				
+			self.nodes.write_flow()
+			self.on_print_filter()
 		dlg.Destroy()
 
-	def add_action(self):
-		self.sk_node_template = '''
-		    {			
-		        "id": "",
-				"type": "signalk-input-handler-next",
-		        "z": "",
-		        "name": "",
-		        "x": 380,
-		        "y": 120,
-		        "wires": []
-		    }'''		
-		
-		ActionNodes = []
-		sk_node = ujson.loads(self.sk_node_template)
-		sk_node['id'] = self.nodes.get_node_id()
-		sk_node['z'] = self.actions_flow_id
-		sk_node['name'] = 'a|'+sk_node['id']+'|0'
-		ActionNodes.append(sk_node)
-		action_connector_id = sk_node['id']
-							
-		for i in ActionNodes:
-			self.actions_flow_nodes.append(i)
-			if 'dname' in i: items = i['dname'].split('|')
-			elif 'name' in i: items = i['name'].split('|')
-		self.actions_flow_tree[self.act_action_flow_tree]['conditions'][0]['actions'].append({"action_node_out_id": items[1],"type": items[2]})
-		for i in self.conditions_flow_nodes:
-			if i['id'] == self.condition_id: i['wires'][0].append(action_connector_id)
-
-	def on_delete_trigger(self, e):
-		if self.selected_trigger == -1:
+	def on_delete_filter(self, e):
+		if self.selected_filter == -1:
 			self.ShowStatusBarRED(_('Select an item to delete'))
 			return
-		node = self.actions_flow_tree[self.selected_trigger]['trigger_node_out_id']
-		triggertype = self.actions_flow_tree[self.selected_trigger]['type']
-		name = 't|'+node+'|'+triggertype
-		conditions = self.actions_flow_tree[self.selected_trigger]['conditions']
-		for condition in conditions:
-			nodec = condition['condition_node_out_id']
-			operatortype = condition['operator']
-			namec = 'c|'+nodec+'|'+operatortype
-			actions = condition['actions']
-			for action in actions:
-				nameaction = 'a|'+action['action_node_out_id']+'|'+action['type']
-				self.delete_action_nodes(nameaction,action['type'],nodec)
-			self.delete_condition_nodes(namec,node)
+		self.nodes.OPnodes.remove(self.nodes.OPnodes[self.selected_filter])
+		self.nodes.write_flow()
+		self.on_print_filter()
 
-		self.delete_trigger_nodes(name)
-		del self.actions_flow_tree[self.selected_trigger]
+	def pageSKprefer(self):
+		self.available_operators = ['eq', 'neq', 'lt', 'lte', 'gt', 'gte','btwn', 'cont', 'true', 'false', 'null', 'nnull', 'empty', 'nempty']
+		self.available_conditions = ['=', '!=', '<', '<=', '>', '>=', _('is between'), _('contains'), _('is true'), ('is false'), _('is null'), _('is not null'), _('is empty'), _('is not empty')]		
+
+		self.available_source = [_('label'),_('type'),_('pgn'),_('src'),_('sentence'),_('talker')]
+		self.available_source_nr = ['label','type','pgn','src','sentence','talker']
+
+		self.SetBackgroundColour(wx.Colour(230,230,230,255))
 		
-		self.on_print_triggers()
-
-	def delete_trigger_nodes(self,name):
-		tmplist = []
-		for i in self.triggers_flow_nodes:
-			name2 = ''
-			if 'name' in i: name2 = i['name']
-			elif not 'name' in i:
-				subid0 = i['id'].split('.')
-				subid = subid0[0]
-				for ii in self.triggers_flow_nodes:
-					subidii = ii['id'].split('.')
-					if 'name' in ii and subid == subidii[0]: name2 = ii['name']
-			if name != name2: tmplist.append(i)
-
-		self.triggers_flow_nodes = tmplist
+		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		
-	def delete_condition_nodes(self,name,triggernode):
-		tmplist = []
-		for i in self.conditions_flow_nodes:
-			name2 = ''
-			if 'name' in i: name2 = i['name']
-			if name != name2: tmplist.append(i)
-			else:
-				for ii in self.triggers_flow_nodes:
-					if ii['id'] == triggernode:
-						if i['id'] in ii['wires'][0]: ii['wires'][0].remove(i['id'])
-		self.conditions_flow_nodes = tmplist
+		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
+		self.SetIcon(self.icon)
+
+		self.list_prefer = wx.ListCtrl(self.p_SKprefer, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
+		self.list_prefer.InsertColumn(0, _('Signal K key'), width=240)
+		self.list_prefer.InsertColumn(1, _('Source Type'), width=120)
+		self.list_prefer.InsertColumn(2, _('Value'), width=70)
+		self.list_prefer.InsertColumn(3, _('max Timeout'), width=100)
+
+		self.list_prefer.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select_prefer)
+		self.list_prefer.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselected_prefer)
+		self.list_prefer.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_edit_prefer)
+
+		add_prefer = wx.Button(self.p_SKprefer, label=_('add'))
+		add_prefer.Bind(wx.EVT_BUTTON, self.on_add_prefer)
+
+		delete_prefer = wx.Button(self.p_SKprefer, label=_('delete'))
+		delete_prefer.Bind(wx.EVT_BUTTON, self.on_delete_prefer)
+
+		restart_SK = wx.Button(self.p_SKprefer, label=_('Restart Signal K'))
+		restart_SK.Bind(wx.EVT_BUTTON, self.on_restart_SK)
+
+		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
+		hlistbox_but.Add(add_prefer, 0, wx.ALL, 5)
+		hlistbox_but.Add(delete_prefer, 0, wx.ALL, 5)
+
+		hlistbox = wx.BoxSizer(wx.HORIZONTAL)
+		hlistbox.Add(self.list_prefer, 1, wx.ALL | wx.EXPAND, 5)
+		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
+
+		hbox = wx.BoxSizer(wx.HORIZONTAL)
+		hbox.AddStretchSpacer(1)
+		hbox.Add(restart_SK, 0, wx.RIGHT | wx.LEFT, 5)
+
+		vbox = wx.BoxSizer(wx.VERTICAL)
+		vbox.Add(hlistbox, 1, wx.ALL | wx.EXPAND, 0)
+		vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 5)
+
+		self.p_SKprefer.SetSizer(vbox)
 		
-	def delete_action_nodes(self,name,actiontype,conditionnode):
-		tmplist = []
-		for i in self.actions_flow_nodes:
-			name2 = ''
-			if 'dname' in i: name2 = i['dname']
-			elif 'name' in i: name2 = i['name']
-			elif not 'name' in i:
-				subid0 = i['id'].split('.')
-				subid = subid0[0]
-				for ii in self.actions_flow_nodes:
-					subidii = ii['id'].split('.')
-					if 'name' in ii and subid == subidii[0]: name2 = ii['name']
-			if name != name2: tmplist.append(i)
-			else:
-				for ii in self.conditions_flow_nodes:
-					if ii['id'] == conditionnode:
-						if i['id'] in ii['wires'][0]: ii['wires'][0].remove(i['id'])
-				if actiontype == '4' and 'type' in i:
-					if i['type'] == 'e-mail': self.remove_credentials.append(i['id'])
-		self.actions_flow_nodes = tmplist
-
-	def on_apply_changes_triggers(self, e):
-		all_flows = []
-		result = self.nodes.get_flow()
-		no_actions_nodes = result[4]
-		others_flow_nodes = result[5]
-
-		for i in no_actions_nodes:
-			all_flows.append(i)
-		for i in others_flow_nodes:
-			all_flows.append(i)
-		for i in self.triggers_flow_nodes:
-			all_flows.append(i)
-		for i in self.conditions_flow_nodes:
-			all_flows.append(i)
-			if i["type"] == "switch":
-				result = []
-				if 'vt' in i['rules'][0] and i['rules'][0]['vt'] == 'flow':
-					result = self.nodes.get_subscription(i['rules'][0]['v'])
-					name = result[0]['name']
-					exists = False
-					for ii in all_flows:
-						if 'name' in ii and ii['name'] == name: exists = True
-					if not exists:
-						for iii in result: all_flows.append(iii)
-				if 'v2t' in i['rules'][0] and i['rules'][0]['v2t'] == 'flow':
-					result = self.nodes.get_subscription(i['rules'][0]['v2'])
-					name = result[0]['name']
-					exists = False
-					for ii in all_flows:
-						if 'name' in ii and ii['name'] == name: exists = True
-					if not exists:
-						for iii in result: all_flows.append(iii)
-
-		for i in self.actions_flow_nodes:
-			all_flows.append(i)
-			if i["type"] == "change":
-				result = []
-				c = len(i['rules'])
-				if c == 1 and 'tot' in i['rules'][0] and i['rules'][0]['tot'] == 'flow':
-					result = self.nodes.get_subscription(i['rules'][0]['to'])
-				if c > 1 and 'tot' in i['rules'][1] and i['rules'][1]['tot'] == 'flow':
-					result = self.nodes.get_subscription(i['rules'][1]['to'])
-				if result:
-					name = result[0]['name']
-					exists = False
-					for ii in all_flows:
-						if 'name' in ii and ii['name'] == name: exists = True
-					if not exists:
-						for iii in result: all_flows.append(iii)
-			if i["type"] == "template":
-				result = []
-				if 'template' in i: 
-					matches = re.findall("{{(.*?)}}", i['template'])
-					for ii in matches:
-						value_list = ii.split('.')
-						value_list.pop(0)
-						skkey = '.'.join(value_list)
-						result = self.nodes.get_subscription(skkey)
-						name = result[0]['name']
-						exists = False
-						for iii in all_flows:
-							if 'name' in iii and iii['name'] == name: exists = True
-						if not exists:
-							for iiii in result: all_flows.append(iiii)
-
-		shortcut = []
-		idabs = []
-		idabs_parent = []
-		line = 0
-		absline = 0
-		treeline = 0
+		self.read_prefer()
 		
-		#create list of shortcuts
-		for i in all_flows:
-			if 'type' in i and 'wires' in i and 'id' in i and i['z'] == self.actions_flow_id:
-				if i['wires'] in [[],[[]],[[],[]],[[],[],[]]]:
-					#line,tree,parent,x,y,idnum,wiresnum,id,wires
-					# 0     1    2    3 4   5       6     7   8
-					shortcut.append([line,-1,-1,-1,-1,absline,-1,i['id'],''])
-					line += 1
-				else:
-					treeline = 0
-					for ii in i['wires'][0]:
-						shortcut.append([line,treeline,-1,-1,-1,absline,-1,i['id'],ii])
-						line += 1
-						treeline += 1
-				idabs.append(i['id'])
-				idabs_parent.append(absline)
-				absline += 1
-			#print absline,line,i
+		font_statusBar = self.GetStatusBar().GetFont()
+		font_statusBar.SetWeight(wx.BOLD)
+		self.GetStatusBar().SetFont(font_statusBar)
+		self.GetStatusBar().SetForegroundColour(wx.BLACK)
 
-		#print 'idabs'
-		#for i in idabs: print idabs.index(i),i
+	def read_prefer(self):
+		self.nodes = nodes_SK_subflow.Nodes(self)
+		self.nodes.get_flow()
+		self.on_print_prefer()
 
-		#print 'idabs_parent'
-		#for i in idabs_parent: print idabs_parent.index(i),i
+	def on_print_prefer(self):
+		self.list_prefer.DeleteAllItems()
+		for nodesi in self.nodes.PPnodes:
+			self.list_prefer.Append([nodesi[1], nodesi[4], nodesi[3], nodesi[2]])
 
-		#find idnum for id
-		for i in shortcut:
-			if i[8] != '':
-				i[6] = idabs.index(i[8])			
-				idabs_parent[i[6]] = -1				
+	def on_select_prefer(self, e):
+		self.selected_prefer = self.list_prefer.GetFirstSelected()
+	
+	def on_deselected_prefer(self, e):
+		self.on_print_prefer()
 
-		#print 'idabs_parent'
-		#for i in idabs_parent: print idabs_parent.index(i),i
-			
-		parentlist = []
-		parentnum = 0
-		#create parentlist
-		for i in idabs_parent:
-			if i > -1:
-				parentlist.append(i)
-				for j in shortcut:
-					if j[5] == i:
-						j[2]=parentnum
-						j[3]=0
-						j[4]=0
-				parentnum += 1
-			
-		#print 'shortcut'
-		#for i in shortcut: print i
-		
-		#identify x position of following nodes
-		for j in range(10):
-			for i in shortcut:
-				if i[3] == j:
-					for ii in shortcut:
-						if ii[5] == i[6]:
-							if ii[3] == -1:						
-								ii[3] = j+1
-								ii[2] = i[2]
+	def on_edit_prefer(self, e):
+		if self.selected_prefer == -1: return
+		self.edit_add_prefer(self.selected_prefer)
 
-		for j in range(len(parentlist)):
-			y = 1
-			#find all forks and set y
-			for i in shortcut:
-				if i[2] == j and i[1] >= 1:
-					i[4] = y
-					y += 1
+	def on_add_prefer(self, e):
+		self.edit_add_prefer(-1)
 
-		#print 'shortcut'
-		#for i in shortcut: print i
-		
-		for j in range(10):
-			for i in shortcut:
-				#x -1
-				if i[3] == j:
-					for ii in shortcut:
-						#x -1
-						if ii[5] == i[6]:
-							if ii[4] == -1:
-								ii[4] = i[4]
+	def edit_add_prefer(self, line):
+		dlg = nodes_SK_subflow.SetupPreferSK(self,line)
+		res = dlg.ShowModal()
+		if res == wx.OK:
+			self.nodes.write_flow()
+			self.on_print_prefer()
+		dlg.Destroy()
 
-		fork = []
-		for j in range(len(parentlist)):
-			for i in shortcut:
-				#x -1
-				if i[2] == j and i[1] >= 1:
-					# line,linenum,mainfork(y),subfork(y),x
-					fork.append([i[2],i[0],shortcut[i[0]-1][4],i[4],i[3]])
-					i[4] = shortcut[i[0]-1][4]
-		
-		fork=sorted(fork, key=lambda x: (x[0], x[2], -x[4]))
+	def on_delete_prefer(self, e):
+		if self.selected_prefer == -1:
+			self.ShowStatusBarRED(_('Select an item to delete'))
+			return
+		self.nodes.PPnodes.remove(self.nodes.PPnodes[self.selected_prefer])
+		self.nodes.write_flow()
+		self.on_print_prefer()
 
-		#print 'fork'
-		#for i in fork: print i
-
-		#set lines with fork in right direction
-		#build a converting table
-		convert = []
-		for j in range(len(parentlist)):
-			convert.append([0])
-			for i in fork:
-				if i[0] == j:
-					convert[j].append(0)
-
-		#set values to converting table
-		for j in range(len(parentlist)):
-			y = 1
-			for i in fork:
-				if i[0] == j:
-					convert[j][i[3]] = y
-					y += 1
-		
-		#print 'convert'
-		#for i in convert: print i
-
-		#convert every line
-		for i in shortcut:
-			i[4] = convert[i[2]][i[4]]
-
-		#print 'shortcut'
-		#for i in shortcut: print i
-
-		xstart = 140
-		ystart = 60
-		xstep = 220
-		ystep = 55
-		ymax = 0
-		for j in range(len(parentlist)):
-			if ymax >= ystart:
-				ystart = ymax + ystep
-
-			for i in all_flows:
-				if 'type' in i and 'wires' in i and 'id' in i and i['z'] == self.actions_flow_id:
-					for ii in reversed(shortcut):
-						if i['id'] == ii[7] and ii[2] == j:
-							i['x'] = xstart + xstep * ii[3]
-							i['y'] = ystart + ystep * ii[4]
-							if i['y'] > ymax:
-								ymax = i['y']						
-					
-		self.nodes.write_flow(all_flows)
-		self.restart_SK()
-		seconds = 15
-		for i in range(seconds, 0, -1):
-			self.ShowStatusBarGREEN(_('Signal K server restarted')+' | '+_('Starting Node-Red... ')+str(i))
-			time.sleep(1)
-		self.ShowStatusBarGREEN(_('Signal K server restarted')+' | '+_('Node-Red restarted'))
-
-	def on_cancel_changes_triggers(self, e):
-		self.read_triggers()
-
-	def on_help_filter(self, e):
-		url = "/usr/share/openplotter-doc/tools/filter_signalk_inputs.html"
+	def on_help_prefer(self, e):
+		url = "/usr/share/openplotter-doc/tools/prefer_signalk_inputs.html"
 		webbrowser.open(url, new=2)
 		
 	def start_SK(self):
@@ -713,18 +342,7 @@ class SKfilterFrame(wx.Frame):
 		subprocess.call(['sudo', 'systemctl', 'stop', 'signalk.service'])
 		subprocess.call(['sudo', 'systemctl', 'stop', 'signalk.socket'])
 		
-	def ShowStatusBarRED(self, w_msg):
-		self.ShowStatusBar(w_msg, wx.RED)
-
-	def ShowStatusBarGREEN(self, w_msg):
-		self.ShowStatusBar(w_msg, wx.GREEN)
-
-	def ShowStatusBar(self, w_msg, colour):
-		#self.GetStatusBar().SetForegroundColour(colour)
-		#self.SetStatusText.value = w_msg
-		pass
-
-	def restart_SK(self):
+	def on_restart_SK(self,e):
 		seconds = 12
 		# stopping sk server
 		self.stop_SK()
@@ -735,10 +353,6 @@ class SKfilterFrame(wx.Frame):
 			time.sleep(1)
 		self.ShowStatusBarGREEN(_('Signal K server restarted'))
 		
-	def on_diagnostic_SK(self, e):
-		subprocess.call(['pkill', '-f', 'diagnostic-SKinput'])
-		subprocess.Popen(['diagnostic-SKinput'])
-
 def main():
 	app = wx.App()
 	SKfilterFrame().Show()

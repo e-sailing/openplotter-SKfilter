@@ -22,6 +22,15 @@ class selectKey(wx.Dialog):
 	def __init__(self, oldkey, selectvessels):
 		wx.Dialog.__init__(self, None, title=_('Select Signal K key'), size=(710, 460))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
+		
+		self.currentdir = os.path.dirname(__file__)
+		if self.currentdir == '':
+			print('no')
+			self.currentdir = '/home/pi/openplotter-SKfilter/openplotterSKfilter'	
+		
+		icon = wx.Icon(self.currentdir+"/data/openplotter-signalk.png", wx.BITMAP_TYPE_PNG)
+		self.SetIcon(icon)		
+
 		panel = wx.Panel(self)
 		panel.SetBackgroundColour(wx.Colour(230,230,230,255))
 
@@ -32,13 +41,13 @@ class selectKey(wx.Dialog):
 		node_path_all = subprocess.check_output(['npm', 'config', 'get', 'prefix']).decode(sys.stdin.encoding)
 		node_path_line = node_path_all.split('\n')
 		node_path = '/usr'
-		print(node_path_line)
+		#print(node_path_line)
 		if len(node_path_line) > 0:
 			node_path = node_path_line[len(node_path_line) - 1]
-			print(node_path_line[len(node_path_line) - 1])
+			#print(node_path_line[len(node_path_line) - 1])
 			if len(node_path_line) > 1 and node_path == '':
 				node_path = node_path_line[len(node_path_line) - 2]
-				print(node_path_line[len(node_path_line) - 2])
+				#print(node_path_line[len(node_path_line) - 2])
 		keyswithmetadata = node_path+'/lib/node_modules/signalk-server/node_modules/@signalk/signalk-schema/dist/keyswithmetadata.json'
 
 		try:
