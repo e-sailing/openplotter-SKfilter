@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import wx
-from .getkeys import GetKeys
-
+import wx, os
+if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
+	from .getkeys import GetKeys
+else:
+	from getkeys import GetKeys
 
 class showKeys(wx.Dialog):
 	def __init__(self):

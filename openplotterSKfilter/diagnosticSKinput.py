@@ -19,9 +19,12 @@ import wx, os, websocket, subprocess, ujson, time, threading, logging
 
 from openplotterSettings import conf
 from openplotterSettings import language
-
-from .getkeys import GetKeys
-from .show_keys import showKeys
+if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
+	from .show_keys import showKeys
+	from .getkeys import GetKeys
+else:
+	from show_keys import showKeys
+	from getkeys import GetKeys
 
 class MyFrame(wx.Frame):
 	def __init__(self):
@@ -47,10 +50,7 @@ class MyFrame(wx.Frame):
 		SK_ = SK_settings(self.conf)
 		self.ws_name = SK_.ws+SK_.ip+":"+str(SK_.aktport)+"/signalk/v1/stream?subscribe=self"
 
-		self.currentdir = os.path.dirname(__file__)
-		if self.currentdir == '':
-			print('no')
-			self.currentdir = '/home/pi/openplotter-SKfilter/openplotterSKfilter'
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 		#Language(self.conf)

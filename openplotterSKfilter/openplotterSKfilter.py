@@ -21,8 +21,10 @@ import wx.richtext as rt
 from openplotterSettings import conf
 from openplotterSettings import language
 from openplotterSettings import platform
-from openplotterSKfilter import nodes_SK_subflow
-#import nodes_SK_subflow
+if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
+	from openplotterSKfilter import nodes_SK_subflow
+else:
+	import nodes_SK_subflow
 
 class SKfilterFrame(wx.Frame):
 	def __init__(self):
@@ -38,10 +40,7 @@ class SKfilterFrame(wx.Frame):
 			self.SK = True			
 		
 		self.platform = platform.Platform()
-		self.currentdir = os.path.dirname(__file__)
-		if self.currentdir == '':
-			print('no')
-			self.currentdir = '/home/pi/openplotter-SKfilter/openplotterSKfilter'
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 

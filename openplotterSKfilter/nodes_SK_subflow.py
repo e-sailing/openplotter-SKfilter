@@ -15,9 +15,11 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import ujson, uuid, wx, re, time, webbrowser, datetime
-from openplotterSKfilter import select_key
-#import select_key
+import ujson, uuid, wx, re, time, webbrowser, datetime, os
+if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
+	from openplotterSKfilter import select_key
+else:
+	import select_key
 
 class Nodes:
 	def __init__(self,parent):

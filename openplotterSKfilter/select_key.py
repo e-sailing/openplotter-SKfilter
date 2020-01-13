@@ -23,7 +23,7 @@ class selectKey(wx.Dialog):
 		wx.Dialog.__init__(self, None, title=_('Select Signal K key'), size=(710, 460))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		
-		self.currentdir = os.path.dirname(__file__)
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		if self.currentdir == '':
 			print('no')
 			self.currentdir = '/home/pi/openplotter-SKfilter/openplotterSKfilter'	

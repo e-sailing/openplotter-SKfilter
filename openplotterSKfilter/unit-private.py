@@ -32,10 +32,7 @@ class MyFrame(wx.Frame):
 		self.home = self.conf.home
 		self.currentpath = self.conf.get('GENERAL', 'op_folder')
 
-		self.currentdir = os.path.dirname(__file__)
-		if self.currentdir == '':
-			print('no')
-			self.currentdir = '/home/pi/openplotter-SKfilter/openplotterSKfilter'
+		self.currentdir = os.path.dirname(os.path.abspath(__file__))
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 		#Language(self.conf)
