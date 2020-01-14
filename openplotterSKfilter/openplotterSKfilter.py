@@ -355,6 +355,7 @@ class SKfilterFrame(wx.Frame):
 def main():
 	app = wx.App()
 	SKfilterFrame().Show()
+	time.sleep(1.5)
 	app.MainLoop()
 
 if __name__ == '__main__':

@@ -59,6 +59,7 @@ class MyFrame(wx.Frame):
 		self.Bind(wx.EVT_CLOSE, self.OnClose)
 		panel = wx.Panel(self, wx.ID_ANY)
 		panel.SetBackgroundColour(wx.Colour(230,230,230,255))
+		self.Show(True)
 
 		self.ttimer = 100
 		self.timer = wx.Timer(self)
@@ -99,17 +100,16 @@ class MyFrame(wx.Frame):
 
 		unit_setting = wx.Button(panel, label=_('Unit Setting'))
 		unit_setting.Bind(wx.EVT_BUTTON, self.on_unit_setting)
-
-		vbox = wx.BoxSizer(wx.VERTICAL)
 		hlistbox = wx.BoxSizer(wx.HORIZONTAL)
-		hbox = wx.BoxSizer(wx.HORIZONTAL)
 		hlistbox.Add(self.list, 1, wx.ALL | wx.EXPAND, 5)
+		hbox = wx.BoxSizer(wx.HORIZONTAL)
 		hbox.Add(sort_SRC, 0, wx.RIGHT | wx.LEFT, 5)
 		hbox.Add(sort_SK, 0, wx.RIGHT | wx.LEFT, 5)
 		hbox.Add(show_keys, 0, wx.RIGHT | wx.LEFT, 5)
 		hbox.Add((0,0), 1, wx.RIGHT | wx.LEFT, 5)
 		hbox.Add(self.private_unit, 0, wx.RIGHT | wx.LEFT, 5)
 		hbox.Add(unit_setting, 0, wx.RIGHT | wx.LEFT, 5)
+		vbox = wx.BoxSizer(wx.VERTICAL)
 		vbox.Add(hlistbox, 1, wx.ALL | wx.EXPAND, 0)
 		vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 0)
 		panel.SetSizer(vbox)
@@ -118,9 +118,7 @@ class MyFrame(wx.Frame):
 
 		self.read()
 		self.start()
-
-		self.Show(True)
-
+			
 		self.status = ''
 		self.data = []
 		self.baudc = 0
