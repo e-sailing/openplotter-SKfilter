@@ -186,8 +186,6 @@ class SKfilterFrame(wx.Frame):
 
 		self.p_SKfilter.SetSizer(vbox)
 		
-		self.read_filter()
-		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
 		self.GetStatusBar().SetFont(font_statusBar)
@@ -282,8 +280,6 @@ class SKfilterFrame(wx.Frame):
 		vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 5)
 
 		self.p_SKprefer.SetSizer(vbox)
-		
-		self.read_prefer()
 		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)

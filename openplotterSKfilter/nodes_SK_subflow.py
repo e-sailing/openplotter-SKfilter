@@ -15,7 +15,7 @@
 # You should have received a copy of the GNU General Public License
 # along with Openplotter. If not, see <http://www.gnu.org/licenses/>.
 
-import ujson, uuid, wx, re, time, webbrowser, datetime, os
+import ujson, uuid, wx, re, time, webbrowser, datetime, os, socket
 if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
 	from openplotterSKfilter import select_key
 else:
@@ -27,7 +27,22 @@ class Nodes:
 		self.available_operators = parent.available_operators
 		
 		home = parent.home
-		self.flows_file = home+'/.signalk/red/flows_openplotter.json'
+		
+		self.setting_file = home+'/.signalk/plugin-config-data/signalk-node-red.json'
+		try:
+			with open(self.setting_file) as data_file:
+				data = ujson.load(data_file)
+				flow_set=data['configuration']['flowFile']
+		except:
+			print("self.setting_file")
+			
+		if flow_set != '':
+			flow_name=data['configuration']['flowFile']
+		else:
+			flow_name='flows_'+socket.gethostname()+'.json'
+		
+		self.flows_file = home+'/.signalk/red/'+flow_name
+		print(self.flows_file)
 	
 	def get_subflow_data(self):
 		node_title = '''
@@ -254,9 +269,10 @@ class Nodes:
 
 		OPfunc = "\nconst timeout = OPtime\nconst prefered = 'OPprefered'\nlet lastSeen = context.get('lastSeen')\n\nvar erg = '';\nif (msg.hasOwnProperty(\"source\")) {\n    if (msg.source !== undefined) {\n        if (msg.source.hasOwnProperty(\"OPproperty\")) {\n            erg = msg.source.OPproperty\n        }\n    }\n}\n//node.warn(\"erg \"+erg)\n\nif ( erg === prefered )\n{\n    node.send(msg)\n    context.set('lastSeen', Date.now())\n    //node.error('go it')\n} else if ( !lastSeen ) {\n    node.send(msg)\n    //node.error('no last')\n} else if ( Date.now() - lastSeen > (timeout *1000)) {\n    node.send(msg)\n    //node.error('timeout')\n}\n\n"
 
-		newdata = []
+		newdata = self.get_subflow_data()
+		
 		for i in self.data:
-			if not (i['id'][0:2] in ['OP','PP']):
+			if not (i['id'][0:2] in ['OP','PP'] or i['id'][0:8] == 'openplot') :
 				newdata.append(i)
 		#OP
 		ii = 0
