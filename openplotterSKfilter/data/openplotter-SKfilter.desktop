@@ -1,5 +1,5 @@
 [Desktop Entry]
-Name=OpenPlotter Signal K Filter
+Name=Signal K Filter
 Exec=openplotter-SKfilter
 Icon=openplotter-SKfilter
 StartupNotify=true

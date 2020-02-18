@@ -27,11 +27,11 @@ setup (
 	author_email='e.minus.sailing@gmail.com',
 	url='https://github.com/openplotter/openplotter-SKfilter',
 	packages=['openplotterSKfilter'],
-	install_requires=['websocket_client','pyudev'],
+	install_requires=['websocket_client'],
 	classifiers = ['Natural Language :: English',
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
-	entry_points={'console_scripts': ['openplotter-SKfilter=openplotterSKfilter.openplotterSKfilter:main','diagnostic-SKinput=openplotterSKfilter.diagnosticSKinput:main']},
+	entry_points={'console_scripts': ['openplotter-SKfilter=openplotterSKfilter.openplotterSKfilter:main','diagnostic-SKinput=openplotterSKfilter.diagnosticSKinput:main', 'SKfilterPostInstall=openplotterSKfilter.SKfilterPostInstall:main']},
 	data_files=[('share/applications', ['openplotterSKfilter/data/openplotter-SKfilter.desktop']),('share/pixmaps', ['openplotterSKfilter/data/openplotter-SKfilter.png','openplotterSKfilter/data/diagnosticSKinput.png']),('share/applications', ['openplotterSKfilter/data/openplotter-diagnostic-SK.desktop','openplotterSKfilter/data/openplotter-SKfilter.desktop']),],
 	)

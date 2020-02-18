@@ -27,6 +27,7 @@ class Nodes:
 		self.available_operators = parent.available_operators
 		
 		home = parent.home
+		flow_set = ''
 		
 		self.setting_file = home+'/.signalk/plugin-config-data/signalk-node-red.json'
 		try:
@@ -34,7 +35,8 @@ class Nodes:
 				data = ujson.load(data_file)
 				flow_set=data['configuration']['flowFile']
 		except:
-			print("self.setting_file")
+			pass
+			#print("self.setting_file")
 			
 		if flow_set != '':
 			flow_name=data['configuration']['flowFile']
@@ -42,7 +44,7 @@ class Nodes:
 			flow_name='flows_'+socket.gethostname()+'.json'
 		
 		self.flows_file = home+'/.signalk/red/'+flow_name
-		print(self.flows_file)
+		#print(self.flows_file)
 	
 	def get_subflow_data(self):
 		node_title = '''

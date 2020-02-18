@@ -3,49 +3,53 @@ Some devices have wrong data or data that conflicts with other devices.
 
 This app filters unwanted Signal K sentences.
 
-Requirement
+### Installing
 
-             openplotter-settings ,
-             @signalk/signalk-node-red
+#### For production
 
-## Build this package as a deb file
-Install requirements
+Install [openplotter-settings](https://github.com/openplotter/openplotter-settings) for **production** and install Dashboard. In Dashboard install nodered.
+Then install this app from *OpenPlotter Apps* tab.
 
-    $ sudo apt-get install fakeroot python3-all
-    $ sudo pip3 install stdeb3
-    $ sudo apt-get install devscripts
+#### For development
 
-Clone and build
-    
-    $ git clone https://github.com/e-sailing/openplotter-SKfilter.git
-    $ cd openplotter-SKfilter
-    $ python3 setup.py --command-packages=stdeb3.command bdist_deb
+Install [openplotter-settings](https://github.com/openplotter/openplotter-settings) for **production** and install Dashboard. In Dashboard install nodered.
 
-Install
+Install dependencies:
 
-The installation of the created deb file (~/openplotter-SKfilter/deb_dist/python3-openplotterskfilter_2.x-x_all.deb)
-can be started from the file manager.
+`sudo apt install python3-websocket`
 
-Run
+Clone the repository:
 
-You can start OpenPlotter Signal K Filter from the menu->other.
+`git clone https://github.com/openplotter/openplotter-SKfilter`
 
-Or with
+Make your changes and create the package:
 
-    $ openplotter-SKfilter
+```
+cd openplotter-SKfilter
+dpkg-buildpackage -b
+```
 
-To uninstall the package
+Install the package:
 
-    $ sudo apt-get purge python3-openplotterskfilter
+```
+cd ..
+sudo dpkg -i openplotter-SKfilter_x.x.x-xxx_all.deb
+```
 
-## Standard installation
+Run post-installation script:
 
-Clone and install
+`sudo SKfilterPostInstall`
 
-    $ git clone https://github.com/e-sailing/openplotter-SKfilter.git
-    $ cd openplotter-SKfilter
-    $ sudo python3 setup.py install
+Run:
 
-Run
+`openplotter-SKfilter`
 
-    $ openplotter-SKfilter
+Make your changes and repeat package, installation and post-installation steps to test. Pull request your changes to github and we will check and add them to the next version of the [Debian package](https://cloudsmith.io/~openplotter/repos/openplotter/packages/).
+
+### Documentation
+
+https://openplotter.readthedocs.io
+
+### Support
+
+http://forum.openmarine.net/forumdisplay.php?fid=1
