@@ -46,7 +46,7 @@ class SKfilterFrame(wx.Frame):
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Signal K Filter'+' '+version), size=(800,444))
+		wx.Frame.__init__(self, None, title=_('Signal K Filter'+' '+version), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -65,7 +65,7 @@ class SKfilterFrame(wx.Frame):
 		diagnosticSK = self.toolbar1.AddTool(103, _('SK Diagnostic'), wx.Bitmap(self.currentdir+"/data/diagnosticSKinput-24.png"))
 		self.Bind(wx.EVT_TOOL, self.OnDiagnosticSK, diagnosticSK)
 		self.toolbar1.AddSeparator()
-		SKrestart = self.toolbar1.AddTool(104, _('Restart Signal K'), wx.Bitmap(self.currentdir+"/data/help.png"))
+		SKrestart = self.toolbar1.AddTool(104, _('Restart Signal K'), wx.Bitmap(self.currentdir+"/data/sk.png"))
 		self.Bind(wx.EVT_TOOL, self.on_restart_SK, SKrestart)
 
 		self.notebook = wx.Notebook(self)
@@ -77,7 +77,7 @@ class SKfilterFrame(wx.Frame):
 		self.notebook.AddPage(self.p_SKfilter, _('Filter'))
 		self.notebook.AddPage(self.p_SKprefer, _('Prefer'))
 		self.il = wx.ImageList(24, 24)
-		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-24.png", wx.BITMAP_TYPE_PNG))
+		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/sk.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
 		self.notebook.SetPageImage(1, img0)
