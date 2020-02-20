@@ -61,9 +61,12 @@ class SKfilterFrame(wx.Frame):
 		if not self.platform.isInstalled('openplotter-doc'): self.toolbar1.EnableTool(101,False)
 		toolSettings = self.toolbar1.AddTool(102, _('Settings'), wx.Bitmap(self.currentdir+"/data/settings.png"))
 		self.Bind(wx.EVT_TOOL, self.OnToolSettings, toolSettings)
+		self.toolbar1.AddSeparator()
 		diagnosticSK = self.toolbar1.AddTool(103, _('SK Diagnostic'), wx.Bitmap(self.currentdir+"/data/diagnosticSKinput-24.png"))
 		self.Bind(wx.EVT_TOOL, self.OnDiagnosticSK, diagnosticSK)
-		self.toolbar1.AddStretchableSpace()
+		self.toolbar1.AddSeparator()
+		SKrestart = self.toolbar1.AddTool(104, _('Restart Signal K'), wx.Bitmap(self.currentdir+"/data/help.png"))
+		self.Bind(wx.EVT_TOOL, self.on_restart_SK, SKrestart)
 
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
@@ -167,9 +170,6 @@ class SKfilterFrame(wx.Frame):
 		delete_filter = wx.Button(self.p_SKfilter, label=_('delete'))
 		delete_filter.Bind(wx.EVT_BUTTON, self.on_delete_filter)
 
-		restart_SK = wx.Button(self.p_SKfilter, label=_('Restart Signal K'))
-		restart_SK.Bind(wx.EVT_BUTTON, self.on_restart_SK)
-
 		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
 		hlistbox_but.Add(add_filter, 0, wx.ALL, 5)
 		hlistbox_but.Add(delete_filter, 0, wx.ALL, 5)
@@ -178,15 +178,7 @@ class SKfilterFrame(wx.Frame):
 		hlistbox.Add(self.list_filter, 1, wx.ALL | wx.EXPAND, 5)
 		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
 
-		hbox = wx.BoxSizer(wx.HORIZONTAL)
-		hbox.AddStretchSpacer(1)
-		hbox.Add(restart_SK, 0, wx.RIGHT | wx.LEFT, 5)
-
-		vbox = wx.BoxSizer(wx.VERTICAL)
-		vbox.Add(hlistbox, 1, wx.ALL | wx.EXPAND, 0)
-		vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 5)
-
-		self.p_SKfilter.SetSizer(vbox)
+		self.p_SKfilter.SetSizer(hlistbox)
 		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
@@ -262,9 +254,6 @@ class SKfilterFrame(wx.Frame):
 		delete_prefer = wx.Button(self.p_SKprefer, label=_('delete'))
 		delete_prefer.Bind(wx.EVT_BUTTON, self.on_delete_prefer)
 
-		restart_SK = wx.Button(self.p_SKprefer, label=_('Restart Signal K'))
-		restart_SK.Bind(wx.EVT_BUTTON, self.on_restart_SK)
-
 		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
 		hlistbox_but.Add(add_prefer, 0, wx.ALL, 5)
 		hlistbox_but.Add(delete_prefer, 0, wx.ALL, 5)
@@ -273,15 +262,7 @@ class SKfilterFrame(wx.Frame):
 		hlistbox.Add(self.list_prefer, 1, wx.ALL | wx.EXPAND, 5)
 		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
 
-		hbox = wx.BoxSizer(wx.HORIZONTAL)
-		hbox.AddStretchSpacer(1)
-		hbox.Add(restart_SK, 0, wx.RIGHT | wx.LEFT, 5)
-
-		vbox = wx.BoxSizer(wx.VERTICAL)
-		vbox.Add(hlistbox, 1, wx.ALL | wx.EXPAND, 0)
-		vbox.Add(hbox, 0, wx.ALL | wx.EXPAND, 5)
-
-		self.p_SKprefer.SetSizer(vbox)
+		self.p_SKprefer.SetSizer(hlistbox)
 		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
@@ -330,26 +311,16 @@ class SKfilterFrame(wx.Frame):
 	def on_help_prefer(self, e):
 		url = "/usr/share/openplotter-doc/tools/prefer_signalk_inputs.html"
 		webbrowser.open(url, new=2)
-		
-	def start_SK(self):
-		subprocess.call(['sudo', 'systemctl', 'start', 'signalk.socket'])
-		subprocess.call(['sudo', 'systemctl', 'start', 'signalk.service'])
 
-	def stop_SK(self):
-		subprocess.call(['sudo', 'systemctl', 'stop', 'signalk.service'])
-		subprocess.call(['sudo', 'systemctl', 'stop', 'signalk.socket'])
-		
-	def on_restart_SK(self,e):
+	def on_restart_SK(self, e):
+		msg = _('Restarting Signal K server... ')
 		seconds = 12
-		# stopping sk server
-		self.stop_SK()
-		# restarting sk server
-		self.start_SK()
+		subprocess.call([self.platform.admin, 'python3', self.currentdir+'/service.py', 'restart'])
 		for i in range(seconds, 0, -1):
-			self.ShowStatusBarRED(_('Restarting Signal K server... ')+str(i))
+			self.ShowStatusBarYELLOW(msg+str(i))
 			time.sleep(1)
 		self.ShowStatusBarGREEN(_('Signal K server restarted'))
-		
+
 def main():
 	try:
 		platform2 = platform.Platform()
