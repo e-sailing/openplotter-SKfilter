@@ -10,6 +10,6 @@ X-Python3-Version: >= 3.2
 Package: openplotter-skfilter
 Architecture: all
 Multi-Arch: foreign
-Depends: ${misc:Depends}, ${python3:Depends}
+Depends: ${misc:Depends}, ${python3:Depends}, openplotter-settings, python3-websocket
 Description: OpenPlotter app to filter Signal K Data
  OpenPlotter app to filter Signal K Data
