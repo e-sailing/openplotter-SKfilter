@@ -23,8 +23,10 @@ from openplotterSettings import language
 from openplotterSettings import platform
 if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr':
 	from openplotterSKfilter import nodes_SK_subflow
+	from .version import version
 else:
 	import nodes_SK_subflow
+	import version
 
 class SKfilterFrame(wx.Frame):
 	def __init__(self):
@@ -44,7 +46,7 @@ class SKfilterFrame(wx.Frame):
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 
-		wx.Frame.__init__(self, None, title=_('OpenPlotter Signal K Filter (uses node-red)'), size=(800,444))
+		wx.Frame.__init__(self, None, title=_('OpenPlotter Signal K Filter'+' '+version), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
@@ -349,6 +351,13 @@ class SKfilterFrame(wx.Frame):
 		self.ShowStatusBarGREEN(_('Signal K server restarted'))
 		
 def main():
+	try:
+		platform2 = platform.Platform()
+		if not platform2.postInstall(version,'SKfilter'):
+			subprocess.Popen(['openplotterPostInstall', platform2.admin+' SKfilterPostInstall'])
+			return
+	except: pass
+
 	app = wx.App()
 	SKfilterFrame().Show()
 	time.sleep(1)

@@ -32,6 +32,6 @@ setup (
 	'Operating System :: POSIX :: Linux',
 	'Programming Language :: Python :: 3'],
 	include_package_data=True,
-	entry_points={'console_scripts': ['openplotter-SKfilter=openplotterSKfilter.openplotterSKfilter:main','diagnostic-SKinput=openplotterSKfilter.diagnosticSKinput:main', 'SKfilterPostInstall=openplotterSKfilter.SKfilterPostInstall:main']},
-	data_files=[('share/applications', ['openplotterSKfilter/data/openplotter-SKfilter.desktop']),('share/pixmaps', ['openplotterSKfilter/data/openplotter-SKfilter.png','openplotterSKfilter/data/diagnosticSKinput.png']),('share/applications', ['openplotterSKfilter/data/openplotter-diagnostic-SK.desktop','openplotterSKfilter/data/openplotter-SKfilter.desktop']),],
+	entry_points={'console_scripts': ['openplotter-SKfilter=openplotterSKfilter.openplotterSKfilter:main','diagnostic-SKinput=openplotterSKfilter.diagnosticSKinput:main', 'SKfilterPostInstall=openplotterSKfilter.SKfilterPostInstall:main', 'SKfilterPreUninstall=openplotterSKfilter.SKfilterPreUninstall:main']},
+	data_files=[('share/applications', ['openplotterSKfilter/data/openplotter-SKfilter.desktop','openplotterSKfilter/data/openplotter-diagnostic-SK.desktop']),('share/pixmaps', ['openplotterSKfilter/data/openplotter-SKfilter.png','openplotterSKfilter/data/diagnosticSKinput.png']),],
 	)
