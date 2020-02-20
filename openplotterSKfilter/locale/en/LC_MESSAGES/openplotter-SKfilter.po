@@ -1,369 +1,375 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the PACKAGE package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-#
 msgid ""
 msgstr ""
-"Project-Id-Version: \n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2019-10-24 17:11+0200\n"
-"PO-Revision-Date: 2019-10-24 17:23+0200\n"
+"Project-Id-Version: openplotter-SKfilter\n"
+"POT-Creation-Date: 2020-02-20 16:41+0100\n"
+"PO-Revision-Date: 2020-02-20 16:41+0100\n"
 "Last-Translator: e-sailing <e.minus.sailing@gmail.com>\n"
 "Language-Team: \n"
-"Language: en_GB\n"
+"Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.2.4\n"
+"X-Generator: Poedit 1.8.7.1\n"
+"X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-SearchPath-0: .\n"
 
-#: diagnosticSKinput.py:73
-msgid "SRC"
+#: SKfilterPostInstall.py:32
+msgid "Installing/Updating Node-Red (Signal K embedded)..."
+msgstr ""
+
+#: SKfilterPostInstall.py:41
+msgid "Failed. Please, install Signal K server"
+msgstr ""
+
+#: SKfilterPostInstall.py:42 SKfilterPostInstall.py:48
+#: SKfilterPreUninstall.py:31
+msgid "DONE"
+msgstr ""
+
+#: SKfilterPostInstall.py:43 SKfilterPostInstall.py:49
+#: SKfilterPreUninstall.py:32
+msgid "FAILED: "
+msgstr ""
+
+#: SKfilterPostInstall.py:45
+msgid "Setting version..."
+msgstr ""
+
+#: SKfilterPreUninstall.py:28
+msgid "Removing version..."
 msgstr ""
 
 #: diagnosticSKinput.py:74
+msgid "SRC"
+msgstr ""
+
+#: diagnosticSKinput.py:75
 msgid "Signal K"
 msgstr ""
 
-#: diagnosticSKinput.py:75 nodes_SK_filter.py:405 nodes_SK_filter.py:413
-#: openplotterSKfilter.py:145
+#: diagnosticSKinput.py:76 nodes_SK_subflow.py:393 nodes_SK_subflow.py:401
+#: nodes_SK_subflow.py:592 openplotterSKfilter.py:160
+#: openplotterSKfilter.py:244
 msgid "Value"
 msgstr ""
 
-#: diagnosticSKinput.py:76 unit-private.py:59
+#: diagnosticSKinput.py:77 unit-private.py:56
 msgid "Unit"
 msgstr ""
 
-#: diagnosticSKinput.py:77
+#: diagnosticSKinput.py:78
 msgid "Interval"
 msgstr ""
 
-#: diagnosticSKinput.py:78
+#: diagnosticSKinput.py:79
 msgid "Status"
 msgstr ""
 
-#: diagnosticSKinput.py:79 unit-private.py:60
+#: diagnosticSKinput.py:80 unit-private.py:57
 msgid "Description"
 msgstr ""
 
-#: diagnosticSKinput.py:80 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:81 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "label"
 msgstr ""
 
-#: diagnosticSKinput.py:81 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:82 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "type"
 msgstr ""
 
-#: diagnosticSKinput.py:82 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:83 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "pgn"
 msgstr ""
 
-#: diagnosticSKinput.py:83 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:84 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "src"
 msgstr ""
 
-#: diagnosticSKinput.py:84 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:85 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "sentence"
 msgstr ""
 
-#: diagnosticSKinput.py:85 openplotterSKfilter.py:130
+#: diagnosticSKinput.py:86 openplotterSKfilter.py:146
+#: openplotterSKfilter.py:231
 msgid "talker"
 msgstr ""
 
-#: diagnosticSKinput.py:87
+#: diagnosticSKinput.py:88
 msgid "Sort SRC"
 msgstr ""
 
-#: diagnosticSKinput.py:90 unit-private.py:68
+#: diagnosticSKinput.py:91 unit-private.py:65
 msgid "Sort SK"
 msgstr ""
 
-#: diagnosticSKinput.py:93
+#: diagnosticSKinput.py:94
 msgid "Show All SK keys"
 msgstr ""
 
-#: diagnosticSKinput.py:96
+#: diagnosticSKinput.py:97
 msgid "private Unit"
 msgstr ""
 
-#: diagnosticSKinput.py:100
+#: diagnosticSKinput.py:101
 msgid "Unit Setting"
 msgstr ""
 
-#: getkeys.py:31
+#: getkeys.py:44 select_key.py:56
 msgid "File not found: "
 msgstr ""
 
-#: getkeys.py:54 show_keys.py:26 show_keys.py:57
+#: getkeys.py:67 show_keys.py:28 show_keys.py:59
 msgid "ungrouped"
 msgstr ""
 
-#: nodes_SK_filter.py:299
-msgid "Add Signal K trigger"
-msgstr ""
-
-#: nodes_SK_filter.py:300
-msgid "Edit Signal K trigger"
-msgstr ""
-
-#: nodes_SK_filter.py:312
+#: nodes_SK_subflow.py:342
 msgid "Add Signal K filter"
 msgstr ""
 
-#: nodes_SK_filter.py:313
+#: nodes_SK_subflow.py:343
 msgid "Edit Signal K filter"
 msgstr ""
 
-#: nodes_SK_filter.py:363 select_key.py:41
+#: nodes_SK_subflow.py:351 select_key.py:63
 msgid "Vessel"
 msgstr ""
 
-#: nodes_SK_filter.py:370 openplotterSKfilter.py:142
+#: nodes_SK_subflow.py:358 nodes_SK_subflow.py:568 openplotterSKfilter.py:157
+#: openplotterSKfilter.py:242
 msgid "Signal K key"
 msgstr ""
 
-#: nodes_SK_filter.py:372
+#: nodes_SK_subflow.py:360 nodes_SK_subflow.py:570
 msgid "Add"
 msgstr ""
 
-#: nodes_SK_filter.py:373
+#: nodes_SK_subflow.py:361 nodes_SK_subflow.py:571
 msgid "Edit"
 msgstr ""
 
-#: nodes_SK_filter.py:374
-msgid "list SK with multiple source"
-msgstr ""
-
-#: nodes_SK_filter.py:387
+#: nodes_SK_subflow.py:375 nodes_SK_subflow.py:585
 msgid "filter on Source"
 msgstr ""
 
-#: nodes_SK_filter.py:394
+#: nodes_SK_subflow.py:382
 msgid "Operator"
 msgstr ""
 
-#: nodes_SK_filter.py:402
+#: nodes_SK_subflow.py:390
 msgid "String"
 msgstr ""
 
-#: nodes_SK_filter.py:402
+#: nodes_SK_subflow.py:390
 msgid "Number"
 msgstr ""
 
-#: nodes_SK_filter.py:424 select_key.py:70
+#: nodes_SK_subflow.py:412 nodes_SK_subflow.py:611 select_key.py:92
 msgid "Cancel"
 msgstr ""
 
-#: nodes_SK_filter.py:425 select_key.py:71
+#: nodes_SK_subflow.py:413 nodes_SK_subflow.py:612 select_key.py:93
 msgid "OK"
 msgstr ""
 
-#: nodes_SK_filter.py:502
+#: nodes_SK_subflow.py:495 nodes_SK_subflow.py:680
 msgid "You have to provide a Signal K key."
 msgstr ""
 
-#: nodes_SK_filter.py:505
+#: nodes_SK_subflow.py:498
 msgid "You have to provide a vessel ID."
 msgstr ""
 
-#: nodes_SK_filter.py:508 select_key.py:309
+#: nodes_SK_subflow.py:501 nodes_SK_subflow.py:683 select_key.py:331
 msgid "Failed. Characters not allowed."
 msgstr ""
 
-#: nodes_SK_filter.py:511
+#: nodes_SK_subflow.py:504 nodes_SK_subflow.py:686
 msgid "You have to provide a filter."
 msgstr ""
 
-#: nodes_SK_filter.py:514
+#: nodes_SK_subflow.py:507
 msgid "You have to provide an operator "
 msgstr ""
 
-#: nodes_SK_filter.py:549 nodes_SK_filter.py:606
+#: nodes_SK_subflow.py:517
+msgid "You have to provide a values."
+msgstr ""
+
+#: nodes_SK_subflow.py:527
 msgid "You have to provide 2 values."
 msgstr ""
 
-#: nodes_SK_filter.py:556 nodes_SK_filter.py:599 nodes_SK_filter.py:613
-msgid "Use this date and time format: YYYY-MM-DD HH:MM:SS"
+#: nodes_SK_subflow.py:559
+msgid "Add Signal K prefer"
 msgstr ""
 
-#: nodes_SK_filter.py:589
-msgid "You have to select a value type."
+#: nodes_SK_subflow.py:560
+msgid "Edit Signal K prefer"
 msgstr ""
 
-#: nodes_SK_filter.py:592
-msgid "You have to provide a value."
+#: nodes_SK_subflow.py:595
+msgid "max timeout[s]"
 msgstr ""
 
-#: nodes_SK_filter.py:640
-msgid "Set Signal K key"
+#: openplotterSKfilter.py:49
+msgid "Signal K Filter "
 msgstr ""
 
-#: nodes_SK_filter.py:641
-msgid "Edit Signal K key"
-msgstr ""
-
-#: openplotterSKfilter.py:48
-msgid "OpenPlotter Signal K Filter (uses node-red)"
-msgstr ""
-
-#: openplotterSKfilter.py:58
+#: openplotterSKfilter.py:59
 msgid "Help"
 msgstr ""
 
-#: openplotterSKfilter.py:61
+#: openplotterSKfilter.py:62
 msgid "Settings"
 msgstr ""
 
-#: openplotterSKfilter.py:70
-msgid "Filter"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is between"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "contains"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is true"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is null"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is not null"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is empty"
-msgstr ""
-
-#: openplotterSKfilter.py:128
-msgid "is not empty"
-msgstr ""
-
-#: openplotterSKfilter.py:143
-msgid "Source Type"
-msgstr ""
-
-#: openplotterSKfilter.py:144
-msgid "Condition"
-msgstr ""
-
-#: openplotterSKfilter.py:146
-msgid "Value2"
-msgstr ""
-
-#: openplotterSKfilter.py:152
-msgid "add"
-msgstr ""
-
-#: openplotterSKfilter.py:155
-msgid "delete"
-msgstr ""
-
-#: openplotterSKfilter.py:158
+#: openplotterSKfilter.py:65
 msgid "SK Diagnostic"
 msgstr ""
 
-#: openplotterSKfilter.py:167
-msgid "Apply changes"
+#: openplotterSKfilter.py:68
+msgid "Restart Signal K"
 msgstr ""
 
-#: openplotterSKfilter.py:169
-msgid "Cancel changes"
+#: openplotterSKfilter.py:77
+msgid "Filter"
 msgstr ""
 
-#: openplotterSKfilter.py:412
+#: openplotterSKfilter.py:78
+msgid "Prefer"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is between"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "contains"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is true"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is null"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is not null"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is empty"
+msgstr ""
+
+#: openplotterSKfilter.py:144 openplotterSKfilter.py:229
+msgid "is not empty"
+msgstr ""
+
+#: openplotterSKfilter.py:158 openplotterSKfilter.py:243
+msgid "Source Type"
+msgstr ""
+
+#: openplotterSKfilter.py:159
+msgid "Condition"
+msgstr ""
+
+#: openplotterSKfilter.py:161
+msgid "Value2"
+msgstr ""
+
+#: openplotterSKfilter.py:167 openplotterSKfilter.py:251
+msgid "add"
+msgstr ""
+
+#: openplotterSKfilter.py:170 openplotterSKfilter.py:254
+msgid "delete"
+msgstr ""
+
+#: openplotterSKfilter.py:221 openplotterSKfilter.py:305
 msgid "Select an item to delete"
 msgstr ""
 
-#: openplotterSKfilter.py:697 openplotterSKfilter.py:699
-#: openplotterSKfilter.py:736
-msgid "Signal K server restarted"
+#: openplotterSKfilter.py:245
+msgid "max Timeout"
 msgstr ""
 
-#: openplotterSKfilter.py:697
-msgid "Starting Node-Red... "
-msgstr ""
-
-#: openplotterSKfilter.py:699
-msgid "Node-Red restarted"
-msgstr ""
-
-#: openplotterSKfilter.py:734
+#: openplotterSKfilter.py:316
 msgid "Restarting Signal K server... "
+msgstr ""
+
+#: openplotterSKfilter.py:322
+msgid "Signal K server restarted"
 msgstr ""
 
 #: select_key.py:23
 msgid "Select Signal K key"
 msgstr ""
 
-#: select_key.py:34
-msgid "Error. File not found: "
-msgstr ""
-
-#: select_key.py:43
+#: select_key.py:65
 msgid "Refresh"
 msgstr ""
 
-#: select_key.py:48 show_keys.py:36
+#: select_key.py:70 show_keys.py:38
 msgid "Groups"
 msgstr ""
 
-#: select_key.py:52 show_keys.py:44
+#: select_key.py:74 show_keys.py:46
 msgid "Keys"
 msgstr ""
 
-#: select_key.py:56
+#: select_key.py:78
 msgid "Properties"
 msgstr ""
 
-#: select_key.py:62
+#: select_key.py:84
 msgid "Replace * (allowed characters: 0-9, a-z, A-Z)"
 msgstr ""
 
-#: select_key.py:64
+#: select_key.py:86
 msgid "Replace"
 msgstr ""
 
-#: select_key.py:67
+#: select_key.py:89
 msgid "Selected key"
 msgstr ""
 
-#: select_key.py:319
+#: select_key.py:341
 msgid "Failed. Replace * by some text."
 msgstr ""
 
-#: show_keys.py:24
+#: show_keys.py:26
 msgid "Show Signal K keys"
 msgstr ""
 
-#: show_keys.py:59
+#: show_keys.py:61
 msgid "Ungrouped Signal K keys."
 msgstr ""
 
-#: unit-private.py:58
+#: unit-private.py:55
 msgid "SK Unit"
 msgstr ""
 
-#: unit-private.py:62
+#: unit-private.py:59
 msgid "Sort SK Unit"
 msgstr ""
 
-#: unit-private.py:65
+#: unit-private.py:62
 msgid "Sort Unit"
 msgstr ""
 
-#: unit-private.py:71
+#: unit-private.py:68
 msgid "change selected"
 msgstr ""
 
-#: unit-private.py:87
+#: unit-private.py:84
 msgid "convert"
 msgstr ""
