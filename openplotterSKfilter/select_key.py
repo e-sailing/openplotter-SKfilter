@@ -67,7 +67,7 @@ class selectKey(wx.Dialog):
 		self.skvessels.SetSelection(0)
 
 		self.list_groups = wx.ListCtrl(panel, style=wx.LC_REPORT, size=(150,-1))
-		self.list_groups.InsertColumn(0, _('Groups'), width=140)
+		self.list_groups.InsertColumn(0, _('Groups'), width=135)
 		self.list_groups.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectGroup)
 
 		self.list_skpaths = wx.ListCtrl(panel, style=wx.LC_REPORT)
@@ -78,7 +78,7 @@ class selectKey(wx.Dialog):
 		self.list_skproperties.InsertColumn(0, _('Properties'), width=120)
 		self.list_skproperties.Bind(wx.EVT_LIST_ITEM_SELECTED, self.OnSelectProperty)
 
-		self.key_description = wx.TextCtrl(panel, -1, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(-1,60))
+		self.key_description = wx.TextCtrl(panel, -1, style=wx.TE_MULTILINE | wx.TE_READONLY, size=(-1,65))
 		self.key_description.SetBackgroundColour(wx.SystemSettings.GetColour(wx.SYS_COLOUR_INACTIVECAPTION))
 
 		wildcard_label = wx.StaticText(panel, label=_('Replace * (allowed characters: 0-9, a-z, A-Z)'))
@@ -277,7 +277,7 @@ class selectKey(wx.Dialog):
 		self.list_skproperties.DeleteAllItems()
 
 		if 'description' in self.grouped_data[self.selected_group]:
-			self.key_description.SetValue('\n  '+self.grouped_data[self.selected_group]['description'])
+			self.key_description.SetValue('\n '+self.grouped_data[self.selected_group]['description'])
 
 		for i in self.grouped_data[self.selected_group]['keys']:
 			self.list_skpaths.Append([i["name"]])
@@ -290,13 +290,13 @@ class selectKey(wx.Dialog):
 		self.list_skproperties.DeleteAllItems()
 
 		if 'description' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']:
-			self.key_description.SetValue('\n  '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['description'])
+			self.key_description.SetValue('\n '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['description'])
 		if 'units' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']:
-			self.key_description.AppendText('\n\n  '+'Units: '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['units'])
+			self.key_description.AppendText('\n   '+'Units: '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['units'])
 		if 'enum' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']:
 			enum = self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['enum']
 			new = [m.encode('utf-8') for m in enum]
-			self.key_description.AppendText('\n\n  '+'Enum: '+str(new))
+			self.key_description.AppendText('\n     '+'Enum: '+str(new))
 
 		if 'properties' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']:
 			for i in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties']:
@@ -310,17 +310,17 @@ class selectKey(wx.Dialog):
 
 		if 'properties' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']:
 			if 'description' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]:
-				self.key_description.SetValue('\n  '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['description'])
+				self.key_description.SetValue('\n '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['description'])
 			if 'units' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]:
-				self.key_description.AppendText('\n\n  '+'Units: '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['units'])
+				self.key_description.AppendText('\n   '+'Units: '+self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['units'])
 			if 'enum' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]:
 				enum = self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['enum']
 				new = [m.encode('utf-8') for m in enum]
-				self.key_description.AppendText('\n\n  '+'Enum: '+str(new))
+				self.key_description.AppendText('\n     '+'Enum: '+str(new))
 			if 'items' in self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]:
 				enum = self.grouped_data[self.selected_group]['keys'][self.selected_path]['content']['properties'][self.selected_text]['items']['enum']
 				new = [m.encode('utf-8') for m in enum]
-				self.key_description.AppendText('\n\n  '+'Enum: '+str(new))
+				self.key_description.AppendText('\n     '+'Enum: '+str(new))
 
 		self.SKkey.SetValue(self.list_groups.GetItemText(self.selected_group)+'.'+self.list_skpaths.GetItemText(self.selected_path)+':'+self.list_skproperties.GetItemText(self.selected_property))
 

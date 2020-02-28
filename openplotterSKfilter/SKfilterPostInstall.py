@@ -38,7 +38,7 @@ def main():
 			subprocess.call(['systemctl', 'start', 'signalk.socket'])
 			subprocess.call(['systemctl', 'start', 'signalk.service'])
 		else: 
-			print(_('Failed. Please, install Signal K server'))
+			print(_('Failed. Please, install Signal K server.'))
 		print(_('DONE'))
 	except Exception as e: print(_('FAILED: ')+str(e))
 

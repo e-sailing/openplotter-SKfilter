@@ -372,7 +372,7 @@ class SetupFilterSK(wx.Dialog):
 		editskkey.AddStretchSpacer(1)
 		editskkey.Add(edit_skkey, 0, wx.RIGHT, 10)		
 
-		sourcelabel = wx.StaticText(panel, label=_('filter on Source'))
+		sourcelabel = wx.StaticText(panel, label=_('Filter on Source'))
 		self.source_select = wx.Choice(panel, choices=self.available_source, style=wx.CB_READONLY)
 
 		source = wx.BoxSizer(wx.HORIZONTAL)
@@ -492,19 +492,19 @@ class SetupFilterSK(wx.Dialog):
 		vessel = self.vessel.GetValue()
 		source = ''
 		if not skkey:
-			wx.MessageBox(_('You have to provide a Signal K key.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide a Signal K key.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif not vessel:
-			wx.MessageBox(_('You have to provide a vessel ID.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide a vessel ID.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif source and not re.match('^[.0-9a-zA-Z]+$', source):
-			wx.MessageBox(_('Failed. Characters not allowed.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('Failed. Characters not allowed.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif self.source_select.GetSelection() == -1:	
-			wx.MessageBox(_('You have to provide a filter.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide a filter.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif self.available_operators_select.GetSelection() == -1:	
-			wx.MessageBox(_('You have to provide an operator '), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide an operator.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		
 		self.old[1] = 'vessels.'+vessel
@@ -514,7 +514,7 @@ class SetupFilterSK(wx.Dialog):
 
 		if self.old[4] in ['eq', 'neq', 'lt', 'lte', 'gt', 'gte','btwn', 'cont']:	
 			if not self.value1.GetValue():
-				wx.MessageBox(_('You have to provide a values.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+				wx.MessageBox(_('You have to provide a value.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 				return
 
 			self.old[5] = self.value1.GetValue()
@@ -524,7 +524,7 @@ class SetupFilterSK(wx.Dialog):
 
 		if self.old[4] == 'btwn':
 			if not self.value2.GetValue():
-				wx.MessageBox(_('You have to provide 2 values.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+				wx.MessageBox(_('You have to provide 2 values.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 				return
 
 			self.old[7] = self.value2.GetValue()
@@ -582,7 +582,7 @@ class SetupPreferSK(wx.Dialog):
 		editskkey.AddStretchSpacer(1)
 		editskkey.Add(edit_skkey, 0, wx.RIGHT, 10)		
 
-		sourcelabel = wx.StaticText(panel, label=_('filter on Source'))
+		sourcelabel = wx.StaticText(panel, label=_('Filter on Source'))
 		self.source_select = wx.Choice(panel, choices=self.available_source, style=wx.CB_READONLY)
 
 		source = wx.BoxSizer(wx.HORIZONTAL)
@@ -592,7 +592,7 @@ class SetupPreferSK(wx.Dialog):
 		value1label = wx.StaticText(panel, label=_('Value'))
 		self.value1 = wx.TextCtrl(panel)
 
-		wtimelabel = wx.StaticText(panel, label=_('max timeout[s]'))
+		wtimelabel = wx.StaticText(panel, label=_('Max timeout[s]'))
 		self.wtime = wx.TextCtrl(panel)
 
 		value1 = wx.BoxSizer(wx.HORIZONTAL)
@@ -677,13 +677,13 @@ class SetupPreferSK(wx.Dialog):
 		skkey = self.skkey.GetValue()
 		source = ''
 		if not skkey:
-			wx.MessageBox(_('You have to provide a Signal K key.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide a Signal K key.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif source and not re.match('^[.0-9a-zA-Z]+$', source):
-			wx.MessageBox(_('Failed. Characters not allowed.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('Failed. Characters not allowed.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		elif self.source_select.GetSelection() == -1:	
-			wx.MessageBox(_('You have to provide a filter.'), 'Info', wx.OK | wx.ICON_INFORMATION)
+			wx.MessageBox(_('You have to provide a filter.'), _('Info'), wx.OK | wx.ICON_INFORMATION)
 			return
 		
 		self.old[1] = skkey

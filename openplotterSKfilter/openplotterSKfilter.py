@@ -46,9 +46,12 @@ class SKfilterFrame(wx.Frame):
 		self.currentLanguage = self.conf.get('GENERAL', 'lang')
 		self.language = language.Language(self.currentdir,'openplotter-SKfilter',self.currentLanguage)
 
-		wx.Frame.__init__(self, None, title=_('Signal K Filter'+' '+version), size=(800,444))
+		if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr': 
+			v = version
+		else: v = version.version
+		wx.Frame.__init__(self, None, title=_('Signal K Filter'+' '+v), size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
-		icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
+		icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter-24.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
 		self.CreateStatusBar()
 		font_statusBar = self.GetStatusBar().GetFont()
@@ -67,6 +70,9 @@ class SKfilterFrame(wx.Frame):
 		self.toolbar1.AddSeparator()
 		SKrestart = self.toolbar1.AddTool(104, _('Restart Signal K'), wx.Bitmap(self.currentdir+"/data/sk.png"))
 		self.Bind(wx.EVT_TOOL, self.on_restart_SK, SKrestart)
+		self.toolbar1.AddSeparator()
+		skNodeRed = self.toolbar1.AddTool(105, _('SK NodeRed'), wx.Bitmap(self.currentdir+"/data/sk.png"))
+		self.Bind(wx.EVT_TOOL, self.OnSkNodeRed, skNodeRed)
 
 		self.notebook = wx.Notebook(self)
 		self.notebook.Bind(wx.EVT_NOTEBOOK_PAGE_CHANGED, self.onTabChange)
@@ -75,9 +81,9 @@ class SKfilterFrame(wx.Frame):
 		self.connections = wx.Panel(self.notebook)
 		self.output = wx.Panel(self.notebook)
 		self.notebook.AddPage(self.p_SKfilter, _('Filter'))
-		self.notebook.AddPage(self.p_SKprefer, _('Prefer'))
+		self.notebook.AddPage(self.p_SKprefer, _('Priority'))
 		self.il = wx.ImageList(24, 24)
-		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/sk.png", wx.BITMAP_TYPE_PNG))
+		img0 = self.il.Add(wx.Bitmap(self.currentdir+"/data/openplotter-SKfilter-24.png", wx.BITMAP_TYPE_PNG))
 		self.notebook.AssignImageList(self.il)
 		self.notebook.SetPageImage(0, img0)
 		self.notebook.SetPageImage(1, img0)
@@ -139,9 +145,13 @@ class SKfilterFrame(wx.Frame):
 		if self.toolbar1.GetToolState(103): self.myoption.SetLabel('1')
 		else: self.myoption.SetLabel('0')
 
+	def OnSkNodeRed(self,e):
+		url = self.platform.http+'localhost:'+self.platform.skPort+'/plugins/signalk-node-red/redAdmin'
+		webbrowser.open(url, new=2)	
+
 	def pageSKfilter(self):
 		self.available_operators = ['eq', 'neq', 'lt', 'lte', 'gt', 'gte','btwn', 'cont', 'true', 'false', 'null', 'nnull', 'empty', 'nempty']
-		self.available_conditions = ['=', '!=', '<', '<=', '>', '>=', _('is between'), _('contains'), _('is true'), ('is false'), _('is null'), _('is not null'), _('is empty'), _('is not empty')]		
+		self.available_conditions = ['=', '!=', '<', '<=', '>', '>=', _('is between'), _('contains'), _('is true'), _('is false'), _('is null'), _('is not null'), _('is empty'), _('is not empty')]		
 
 		self.available_source = [_('label'),_('type'),_('pgn'),_('src'),_('sentence'),_('talker')]
 		self.available_source_nr = ['label','type','pgn','src','sentence','talker']
@@ -150,7 +160,7 @@ class SKfilterFrame(wx.Frame):
 		
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		
-		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
+		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter-24.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(self.icon)
 
 		self.list_filter = wx.ListCtrl(self.p_SKfilter, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
@@ -160,30 +170,29 @@ class SKfilterFrame(wx.Frame):
 		self.list_filter.InsertColumn(3, _('Value'), width=90)
 		self.list_filter.InsertColumn(4, _('Value2'), width=60)
 
-		self.list_filter.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select_filter)
-		self.list_filter.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselected_filter)
-		self.list_filter.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_edit_filter)
+		self.list_filter.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onSelected)
+		self.list_filter.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.OnEditButton)
 
-		add_filter = wx.Button(self.p_SKfilter, label=_('add'))
-		add_filter.Bind(wx.EVT_BUTTON, self.on_add_filter)
+		self.toolbar2 = wx.ToolBar(self.p_SKfilter, style=wx.TB_TEXT | wx.TB_VERTICAL)
+		self.addButton = self.toolbar2.AddTool(201, _('Add'), wx.Bitmap(self.currentdir+"/data/openplotter-SKfilter-24.png"))
+		self.Bind(wx.EVT_TOOL, self.OnAddButton, self.addButton)
+		self.editButton = self.toolbar2.AddTool(202, _('Edit'), wx.Bitmap(self.currentdir+"/data/edit.png"))
+		self.Bind(wx.EVT_TOOL, self.OnEditButton, self.editButton)
+		self.removeButton = self.toolbar2.AddTool(204, _('Remove'), wx.Bitmap(self.currentdir+"/data/cancel.png"))
+		self.Bind(wx.EVT_TOOL, self.OnRemoveButton, self.removeButton)
 
-		delete_filter = wx.Button(self.p_SKfilter, label=_('delete'))
-		delete_filter.Bind(wx.EVT_BUTTON, self.on_delete_filter)
+		sizer = wx.BoxSizer(wx.HORIZONTAL)
+		sizer.Add(self.list_filter, 1, wx.EXPAND, 0)
+		sizer.Add(self.toolbar2, 0)
 
-		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
-		hlistbox_but.Add(add_filter, 0, wx.ALL, 5)
-		hlistbox_but.Add(delete_filter, 0, wx.ALL, 5)
-
-		hlistbox = wx.BoxSizer(wx.HORIZONTAL)
-		hlistbox.Add(self.list_filter, 1, wx.ALL | wx.EXPAND, 5)
-		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
-
-		self.p_SKfilter.SetSizer(hlistbox)
+		self.p_SKfilter.SetSizer(sizer)
 		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
 		self.GetStatusBar().SetFont(font_statusBar)
 		self.GetStatusBar().SetForegroundColour(wx.BLACK)
+		self.toolbar2.EnableTool(202,False)
+		self.toolbar2.EnableTool(204,False)		
 
 	def read_filter(self):
 		self.nodes = nodes_SK_subflow.Nodes(self)
@@ -195,17 +204,22 @@ class SKfilterFrame(wx.Frame):
 		for nodesi in self.nodes.OPnodes:
 			self.list_filter.Append([nodesi[2], nodesi[3], nodesi[4], nodesi[5], nodesi[7]])
 
-	def on_select_filter(self, e):
+	def onSelected(self, e):
 		self.selected_filter = self.list_filter.GetFirstSelected()
-	
-	def on_deselected_filter(self, e):
-		self.on_print_filter()
+		i = e.GetIndex()
+		valid = e and i >= 0
+		if not valid: return
+		#self.onDeselected()
+		self.selected = i
+		if self.list_filter.GetItemBackgroundColour(i) != (200,200,200):
+			self.toolbar2.EnableTool(202,True)
+			self.toolbar2.EnableTool(204,True)
 
-	def on_edit_filter(self, e):
+	def OnEditButton(self, e):
 		if self.selected_filter == -1: return
 		self.edit_add_filter(self.selected_filter)
 
-	def on_add_filter(self, e):
+	def OnAddButton(self, e):
 		self.edit_add_filter(-1)
 
 	def edit_add_filter(self, line):
@@ -216,14 +230,13 @@ class SKfilterFrame(wx.Frame):
 			self.on_print_filter()
 		dlg.Destroy()
 
-	def on_delete_filter(self, e):
-		if self.selected_filter == -1:
-			self.ShowStatusBarRED(_('Select an item to delete'))
-			return
+	def OnRemoveButton(self, e):
 		self.nodes.OPnodes.remove(self.nodes.OPnodes[self.selected_filter])
 		self.nodes.write_flow()
 		self.on_print_filter()
-
+		self.toolbar2.EnableTool(202,False)
+		self.toolbar2.EnableTool(204,False)
+		
 	def pageSKprefer(self):
 		self.available_operators = ['eq', 'neq', 'lt', 'lte', 'gt', 'gte','btwn', 'cont', 'true', 'false', 'null', 'nnull', 'empty', 'nempty']
 		self.available_conditions = ['=', '!=', '<', '<=', '>', '>=', _('is between'), _('contains'), _('is true'), ('is false'), _('is null'), _('is not null'), _('is empty'), _('is not empty')]		
@@ -244,30 +257,29 @@ class SKfilterFrame(wx.Frame):
 		self.list_prefer.InsertColumn(2, _('Value'), width=70)
 		self.list_prefer.InsertColumn(3, _('max Timeout'), width=100)
 
-		self.list_prefer.Bind(wx.EVT_LIST_ITEM_SELECTED, self.on_select_prefer)
-		self.list_prefer.Bind(wx.EVT_LIST_ITEM_DESELECTED, self.on_deselected_prefer)
-		self.list_prefer.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.on_edit_prefer)
+		self.list_prefer.Bind(wx.EVT_LIST_ITEM_SELECTED, self.onSelected2)
+		self.list_prefer.Bind(wx.EVT_LIST_ITEM_ACTIVATED, self.OnEditButton2)
 
-		add_prefer = wx.Button(self.p_SKprefer, label=_('add'))
-		add_prefer.Bind(wx.EVT_BUTTON, self.on_add_prefer)
+		self.toolbar3 = wx.ToolBar(self.p_SKprefer, style=wx.TB_TEXT | wx.TB_VERTICAL)
+		self.addButton2 = self.toolbar3.AddTool(301, _('Add'), wx.Bitmap(self.currentdir+"/data/openplotter-SKfilter-24.png"))
+		self.Bind(wx.EVT_TOOL, self.OnAddButton2, self.addButton2)
+		self.editButton2 = self.toolbar3.AddTool(302, _('Edit'), wx.Bitmap(self.currentdir+"/data/edit.png"))
+		self.Bind(wx.EVT_TOOL, self.OnEditButton2, self.editButton2)
+		self.removeButton2 = self.toolbar3.AddTool(304, _('Remove'), wx.Bitmap(self.currentdir+"/data/cancel.png"))
+		self.Bind(wx.EVT_TOOL, self.OnRemoveButton2, self.removeButton2)
 
-		delete_prefer = wx.Button(self.p_SKprefer, label=_('delete'))
-		delete_prefer.Bind(wx.EVT_BUTTON, self.on_delete_prefer)
+		sizer = wx.BoxSizer(wx.HORIZONTAL)
+		sizer.Add(self.list_prefer, 1, wx.EXPAND, 0)
+		sizer.Add(self.toolbar3, 0)
 
-		hlistbox_but = wx.BoxSizer(wx.VERTICAL)
-		hlistbox_but.Add(add_prefer, 0, wx.ALL, 5)
-		hlistbox_but.Add(delete_prefer, 0, wx.ALL, 5)
-
-		hlistbox = wx.BoxSizer(wx.HORIZONTAL)
-		hlistbox.Add(self.list_prefer, 1, wx.ALL | wx.EXPAND, 5)
-		hlistbox.Add(hlistbox_but, 0, wx.RIGHT | wx.LEFT, 0)
-
-		self.p_SKprefer.SetSizer(hlistbox)
+		self.p_SKprefer.SetSizer(sizer)
 		
 		font_statusBar = self.GetStatusBar().GetFont()
 		font_statusBar.SetWeight(wx.BOLD)
 		self.GetStatusBar().SetFont(font_statusBar)
 		self.GetStatusBar().SetForegroundColour(wx.BLACK)
+		self.toolbar3.EnableTool(302,False)
+		self.toolbar3.EnableTool(304,False)		
 
 	def read_prefer(self):
 		self.nodes = nodes_SK_subflow.Nodes(self)
@@ -279,17 +291,22 @@ class SKfilterFrame(wx.Frame):
 		for nodesi in self.nodes.PPnodes:
 			self.list_prefer.Append([nodesi[1], nodesi[4], nodesi[3], nodesi[2]])
 
-	def on_select_prefer(self, e):
+	def onSelected2(self, e):
 		self.selected_prefer = self.list_prefer.GetFirstSelected()
-	
-	def on_deselected_prefer(self, e):
-		self.on_print_prefer()
-
-	def on_edit_prefer(self, e):
+		i = e.GetIndex()
+		valid = e and i >= 0
+		if not valid: return
+		#self.onDeselected()
+		self.selected = i
+		if self.list_prefer.GetItemBackgroundColour(i) != (200,200,200):
+			self.toolbar3.EnableTool(302,True)
+			self.toolbar3.EnableTool(304,True)
+		
+	def OnEditButton2(self, e):
 		if self.selected_prefer == -1: return
 		self.edit_add_prefer(self.selected_prefer)
 
-	def on_add_prefer(self, e):
+	def OnAddButton2(self, e):
 		self.edit_add_prefer(-1)
 
 	def edit_add_prefer(self, line):
@@ -300,13 +317,12 @@ class SKfilterFrame(wx.Frame):
 			self.on_print_prefer()
 		dlg.Destroy()
 
-	def on_delete_prefer(self, e):
-		if self.selected_prefer == -1:
-			self.ShowStatusBarRED(_('Select an item to delete'))
-			return
+	def OnRemoveButton2(self, e):
 		self.nodes.PPnodes.remove(self.nodes.PPnodes[self.selected_prefer])
 		self.nodes.write_flow()
 		self.on_print_prefer()
+		self.toolbar3.EnableTool(302,False)
+		self.toolbar3.EnableTool(304,False)		
 
 	def on_help_prefer(self, e):
 		url = "/usr/share/openplotter-doc/tools/prefer_signalk_inputs.html"
