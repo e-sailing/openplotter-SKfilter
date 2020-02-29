@@ -1,15 +1,15 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: openplotter-SKfilter\n"
-"POT-Creation-Date: 2020-02-28 23:48+0100\n"
-"PO-Revision-Date: 2020-02-28 23:48+0100\n"
+"POT-Creation-Date: 2020-02-29 15:02+0100\n"
+"PO-Revision-Date: 2020-02-29 15:02+0100\n"
 "Last-Translator: e-sailing <e.minus.sailing@gmail.com>\n"
 "Language-Team: \n"
 "Language: en\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 2.3\n"
+"X-Generator: Poedit 1.8.7.1\n"
 "X-Poedit-Basepath: ../../..\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Poedit-SourceCharset: UTF-8\n"
@@ -39,22 +39,6 @@ msgstr ""
 
 #: SKfilterPreUninstall.py:28
 msgid "Removing version..."
-msgstr ""
-
-#: data/openplotter-SKfilter.desktop:3
-msgid "Signal K Filter"
-msgstr ""
-
-#: data/openplotter-SKfilter.desktop:5
-msgid "openplotter-SKfilter"
-msgstr ""
-
-#: data/openplotter-diagnostic-SK.desktop:3
-msgid "Signal K Diagnostic"
-msgstr ""
-
-#: data/openplotter-diagnostic-SK.desktop:5
-msgid "diagnosticSKinput"
 msgstr ""
 
 #: diagnosticSKinput.py:74
@@ -238,7 +222,7 @@ msgid "Max timeout[s]"
 msgstr ""
 
 #: openplotterSKfilter.py:52
-msgid "Signal K Filter "
+msgid "Signal K Filter"
 msgstr ""
 
 #: openplotterSKfilter.py:62

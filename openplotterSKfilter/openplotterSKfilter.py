@@ -49,7 +49,7 @@ class SKfilterFrame(wx.Frame):
 		if os.path.dirname(os.path.abspath(__file__))[0:4] == '/usr': 
 			v = version
 		else: v = version.version
-		wx.Frame.__init__(self, None, title=_('Signal K Filter'+' '+v), size=(800,444))
+		wx.Frame.__init__(self, None, title=_('Signal K Filter')+' '+v, size=(800,444))
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter-24.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(icon)
