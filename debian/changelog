@@ -1,4 +1,10 @@
-openplotter-skfilter (2.0.0-dev) buster; urgency=medium
+openplotter-skfilter (2.0.1-dev) bionic; urgency=medium
+
+  * Text and languages source changes
+
+ -- Sailoog <info@sailoog.com>  Sat, 29 Feb 2020 15:08:49 +0100
+
+openplotter-skfilter (2.0.0-dev) bionic; urgency=medium
 
   * Initial release
 
