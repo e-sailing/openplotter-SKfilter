@@ -346,7 +346,6 @@ class SetupFilterSK(wx.Dialog):
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 
 		panel = wx.Panel(self)
-		panel.SetBackgroundColour(wx.Colour(230,230,230,255))
 
 		vessellabel = wx.StaticText(panel, label=_('Vessel'))
 		self.vessel = wx.TextCtrl(panel, size=(290,-1))
@@ -563,7 +562,6 @@ class SetupPreferSK(wx.Dialog):
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 
 		panel = wx.Panel(self)
-		panel.SetBackgroundColour(wx.Colour(230,230,230,255))
 
 		skkeylabel = wx.StaticText(panel, label=_('Signal K key'))
 		self.skkey = wx.TextCtrl(panel, size=(290,-1))

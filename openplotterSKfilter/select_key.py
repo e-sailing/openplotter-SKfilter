@@ -32,7 +32,6 @@ class selectKey(wx.Dialog):
 		self.SetIcon(icon)		
 
 		panel = wx.Panel(self)
-		panel.SetBackgroundColour(wx.Colour(230,230,230,255))
 
 		conf_ = conf.Conf()
 		sk_folder = conf_.get('GENERAL', 'sk_folder')

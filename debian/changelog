@@ -1,3 +1,9 @@
+openplotter-skfilter (2.0.2-dev) bionic; urgency=medium
+
+  * Adjust for dark theme
+
+ -- e-sailing Thu, 09 Apr 2020 13:17:43 +0100
+
 openplotter-skfilter (2.0.1-dev) bionic; urgency=medium
 
   * Text and languages source changes

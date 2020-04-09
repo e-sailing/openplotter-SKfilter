@@ -156,14 +156,12 @@ class SKfilterFrame(wx.Frame):
 		self.available_source = [_('label'),_('type'),_('pgn'),_('src'),_('sentence'),_('talker')]
 		self.available_source_nr = ['label','type','pgn','src','sentence','talker']
 
-		self.SetBackgroundColour(wx.Colour(230,230,230,255))
-		
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		
 		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter-24.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(self.icon)
 
-		self.list_filter = wx.ListCtrl(self.p_SKfilter, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
+		self.list_filter = wx.ListCtrl(self.p_SKfilter, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES)
 		self.list_filter.InsertColumn(0, _('Signal K key'), width=240)
 		self.list_filter.InsertColumn(1, _('Source Type'), width=120)
 		self.list_filter.InsertColumn(2, _('Condition'), width=70)
@@ -244,14 +242,12 @@ class SKfilterFrame(wx.Frame):
 		self.available_source = [_('label'),_('type'),_('pgn'),_('src'),_('sentence'),_('talker')]
 		self.available_source_nr = ['label','type','pgn','src','sentence','talker']
 
-		self.SetBackgroundColour(wx.Colour(230,230,230,255))
-		
 		self.SetFont(wx.Font(10, wx.FONTFAMILY_DEFAULT, wx.FONTSTYLE_NORMAL, wx.FONTWEIGHT_NORMAL))
 		
 		self.icon = wx.Icon(self.currentdir+"/data/openplotter-SKfilter.png", wx.BITMAP_TYPE_PNG)
 		self.SetIcon(self.icon)
 
-		self.list_prefer = wx.ListCtrl(self.p_SKprefer, -1, style=wx.LC_REPORT | wx.SIMPLE_BORDER)
+		self.list_prefer = wx.ListCtrl(self.p_SKprefer, -1, style=wx.LC_REPORT | wx.LC_SINGLE_SEL | wx.LC_HRULES)
 		self.list_prefer.InsertColumn(0, _('Signal K key'), width=240)
 		self.list_prefer.InsertColumn(1, _('Source Type'), width=120)
 		self.list_prefer.InsertColumn(2, _('Value'), width=70)
